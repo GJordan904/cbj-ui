@@ -1,0 +1,66 @@
+<div class="site-wrapper">
+    <div class="row m-0">
+        <nav class="navbar" [ngClass]="navbarClasses">
+            <div class="navbar-brand">
+                <div class="menu-toggler" [ngClass]="{open: sidebarOpen}" (click)="sidebarOpen = !sidebarOpen">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+                <ng-content select="[navbar-brand]"></ng-content>
+            </div>
+            <ng-content select="[navbar-content]"></ng-content>
+        </nav>
+    </div>
+
+    <div class="site-inner">
+
+        <nav class="cbj-sidebar" [ngClass]="{open: sidebarOpen}">
+
+            <ng-content select="[sidebar-header]"></ng-content>
+
+            <div class="list-group">
+                <ng-container *ngFor="let link of sidebarLinks.links">
+                    <ng-container *ngIf="link.dropdown; else regLink">
+                        <div class="dropdown-link" (click)="toggleDropdown(link)" [ngClass]="{show: link.dropdownShow}">
+                            <div [class]="sidebarLinks.classes" [cbjRipple]="{size: 317}">
+                                {{link.text}}
+                                <i class="material-icons md-2">keyboard_arrow_right</i>
+                            </div>
+                        </div>
+                        <div class="collapse" [ngStyle]="{'height.px': link.dropdownShow ? link.dropdownHeight : 0}">
+                            <ng-container *ngFor="let subLink of link.children">
+                                <a [class]="sidebarLinks.classes"
+                                   [routerLink]="subLink.link"
+                                   [routerLinkActive]="sidebarLinks.activeClass"
+                                   [cbjRipple]="{size: 317}"
+                                >
+                                    {{subLink.text}}
+                                </a>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <ng-template #regLink>
+                        <a [class]="sidebarLinks.classes"
+                           [routerLink]="link.link"
+                           [routerLinkActive]="sidebarLinks.activeClass"
+                           [cbjRipple]="{size: 317}"
+                        >
+                            {{link.text}}
+                        </a>
+                    </ng-template>
+                </ng-container>
+            </div>
+
+            <ng-content select="[sidebar-footer]"></ng-content>
+
+        </nav>
+
+        <div class="main-content" [ngClass]="{open: sidebarOpen}">
+
+            <ng-content select="[main-content]"></ng-content>
+
+        </div>
+
+    </div>
+</div>

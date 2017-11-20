@@ -1,10 +1,18 @@
 {
   "extends": "../tsconfig.json",
+  "angularCompilerOptions": {
+    "paths": {
+      "@codebyjordan/ui": [ "../cbj-ui/src/index.ts" ]
+    }
+  },
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": []
+    "types": [],
+    "paths": {
+      "@codebyjordan/ui": [ "../cbj-ui/src/index.ts" ]
+    }
   },
   "exclude": [
     "test.ts",

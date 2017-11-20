@@ -1,0 +1,17 @@
+.cbj-sidebar {
+  background-color: $dark;
+
+  .list-group {
+    background-color: transparent;
+
+    .list-group-item {
+      background-color: lighten($dark, 5%);
+      color: $white;
+
+      &.active {
+        color: theme-color(primary);
+        border: none;
+      }
+    }
+  }
+}

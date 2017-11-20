@@ -1,0 +1,45 @@
+<div class="jumbotron jumbotron-fluid bg-primary text-white text-center">
+  <h1>
+    App Drawer
+    <span class="sub">Providing General Structure and App Wide Navigation</span>
+  </h1>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Purpose</h2>
+      <p class="card-text">
+        The app drawer serves not only as a side navigation but as the basic structure of the app.
+        It is best used in the app component or another root view.
+      </p>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <h2 class="card-title">Usage</h2>
+      <p class="card-text">
+        The usage is pretty straightforward for the app drawer. Add it to a root view like app.component and put your
+        content inside specific places using the available select attributes.
+      </p>
+
+      <cbj-card-tabs type="nav-tabs" adlCardClasses="bg-secondary mt-4">
+        <cbj-card-tab title="app.component.ts" icon="dev-icon typescript tiny">
+          <pre><code [cbjHighlight]="compHighlightOpt" [innerHTML]="compHighlightOpt.code"></code></pre>
+        </cbj-card-tab>
+        <cbj-card-tab title="app.component.html" icon="dev-icon html5 tiny">
+          <pre><code [cbjHighlight]="tempHighlightOpt" [innerHTML]="tempHighlightOpt.code"></code></pre>
+        </cbj-card-tab>
+      </cbj-card-tabs>
+
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <cbj-datatable [options]="dtOptions">
+
+      </cbj-datatable>
+    </div>
+  </div>
+</div>

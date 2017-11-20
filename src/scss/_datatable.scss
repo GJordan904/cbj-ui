@@ -1,0 +1,18 @@
+.dtTitle {
+  padding-left: 1rem;
+}
+
+.table {
+  background-color: $white;
+  margin-bottom: 0;
+
+  .dtHeaders {
+    color: $gray-500;
+    font-size: .85rem
+  }
+
+  .dtRow {
+    color: $gray-600;
+    font-size: 1.15rem;
+  }
+}
