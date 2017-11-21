@@ -54,8 +54,8 @@ export class RippleDirective implements OnInit, AfterViewInit {
   }
 
   private setInitStyles() {
-    this.el.nativeElement.style.overflow = 'hidden';
-    this.el.nativeElement.style.position = 'relative';
+    this.renderer.setStyle(this.el.nativeElement, 'overflow', 'hidden');
+    this.renderer.setStyle(this.el.nativeElement, 'position', 'relative');
     this.renderer.addClass(this.el.nativeElement, 'cbj-ripple');
   }
 

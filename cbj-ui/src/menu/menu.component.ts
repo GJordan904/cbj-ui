@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
+import {AfterContentInit, Component, ContentChildren, HostListener, Input, QueryList} from '@angular/core';
 import {CbjMenuItemDirective} from './menu-item.directive';
 
 @Component({
@@ -11,6 +11,17 @@ export class CbjMenuComponent implements AfterContentInit {
   @ContentChildren(CbjMenuItemDirective) items: QueryList<CbjMenuItemDirective>;
   toggleClasses: {};
   toggleTitle: string;
+  open = false;
+
+  @HostListener('click')
+  onClick() {
+    this.open = true;
+  }
+
+  @HostListener('focusout')
+  onFocusOut() {
+    this.open = false;
+  }
 
   constructor() { }
 

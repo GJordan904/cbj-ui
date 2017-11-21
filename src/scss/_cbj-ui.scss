@@ -44,10 +44,30 @@
  */
 
 .btn {
+  align-items: center;
+  display: inline-flex;
   background: transparent;
+  color: $white;
 
-  &:hover {
+  .material-icons {
+    margin: 0 .25rem;
+  }
 
+  &:active, &:focus {
+    background-color: rgba($gray-600, .5);
+    color: $gray-300;
+  }
+
+  @each $color, $value in $theme-colors {
+    &.btn-#{$color} {
+      background: transparent;
+      color: $value;
+
+      &:active, &:focus {
+        background-color: $value;
+        color: $body-color;
+      }
+    }
   }
 
   &.raised {
@@ -116,24 +136,61 @@
   }
 }
 
+/**
+ * Menu
+ */
 .cbj-dropdown {
   position: relative;
   display: inline-flex;
 
   .cbj-menu {
-    display: none;
+    width: 0%;
+    border-radius: 2.5%;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    padding: .15rem 0;
+    padding: 0;
     background: #fff;
+    transition: height 350ms ease-in-out, width 350ms 350ms ease-out;
+    overflow: hidden;
+    @include elevation-3;
+
+    &.open {
+      width: 100%;
+    }
 
     .cbj-menu-item {
       display: block;
       width: 100%;
       background: transparent;
+      border: none;
+      padding: .75rem .5rem;
+
+      &.active {
+        background-color: rgba($black, 0.25);
+      }
     }
   }
 }
 
+/**
+ * Datatable
+ */
+.dtTitle {
+  padding: .25rem .25rem;
+}
+
+.table {
+  background-color: $white;
+  margin-bottom: 0;
+
+  .dtHeaders {
+    color: $gray-500;
+    font-size: .85rem
+  }
+
+  .dtRow {
+    color: $gray-600;
+    font-size: 1.15rem;
+  }
+}
