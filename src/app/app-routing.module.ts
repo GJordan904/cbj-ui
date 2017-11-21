@@ -29,8 +29,7 @@ const routes: Routes = [
     { path: 'bytes-transform', component: BytesTransformDemoComponent },
   ]
   },
-  {
-    path: 'models/{model}', component: ModelsPreviewComponent },
+  { path: 'models/{model}', component: ModelsPreviewComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home' }
 ];
 

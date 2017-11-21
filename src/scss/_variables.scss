@@ -36,16 +36,17 @@ $grays: map-merge((
         "900": $gray-900
 ), $grays);
 
-$blue:    #007bff;
-$indigo:  #6610f2;
-$purple:  #6f42c1;
-$pink:    #e83e8c;
-$red:     #dc3545;
-$orange:  #fd7e14;
-$yellow:  #ffc107;
-$green:   #28a745;
-$teal:    #20c997;
-$cyan:    #17a2b8;
+$blue:    #004FFF;
+$indigo:  #011936;
+$purple:  #361134;
+$pink:    #D90368;
+$red:     #841C26;
+$orange:  #F15946;
+$yellow:  #F9DC5C;
+$green:   #04E762;
+$teal:    #70C1B3;
+$cyan:    #247BA0;
+$snow:    #FFFBFC;
 
 $colors: ();
 $colors: map-merge((
