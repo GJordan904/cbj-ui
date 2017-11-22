@@ -1,10 +1,11 @@
-import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnInit, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[cbjMenuItem]'
 })
 export class CbjMenuItemDirective implements OnInit {
   @Input('cbjMenuItem')label: string;
+  @Input('cbjMenuClick')cbjMenuClick: Function;
 
   private _active = false;
   @Input()
@@ -12,13 +13,19 @@ export class CbjMenuItemDirective implements OnInit {
     return this._active;
   }
   set active(active: boolean) {
-    console.log('setting active');
     this._active = active;
     if (active) {
-      console.log('active');
       this.renderer.addClass(this.el.nativeElement, 'active');
     } else {
       this.renderer.removeClass(this.el.nativeElement, 'active');
+    }
+  }
+
+  @HostListener('click')
+  onClick() {
+    this.active = true;
+    if (this.cbjMenuClick !== undefined) {
+      this.cbjMenuClick();
     }
   }
 

@@ -1,9 +1,11 @@
 import {AfterContentInit, Component, ContentChildren, HostListener, Input, QueryList} from '@angular/core';
 import {CbjMenuItemDirective} from './menu-item.directive';
+import {toggleMenu} from '../animations/menu';
 
 @Component({
   selector: 'cbj-menu',
-  templateUrl: './menu.component.html'
+  templateUrl: './menu.component.html',
+  animations: [ toggleMenu() ]
 })
 export class CbjMenuComponent implements AfterContentInit {
   @Input('arrow')arrow: boolean;
@@ -11,16 +13,16 @@ export class CbjMenuComponent implements AfterContentInit {
   @ContentChildren(CbjMenuItemDirective) items: QueryList<CbjMenuItemDirective>;
   toggleClasses: {};
   toggleTitle: string;
-  open = false;
+  menuState = 'closed';
 
   @HostListener('click')
   onClick() {
-    this.open = true;
+    this.menuState = this.menuState === 'open' ? 'closed' : 'open';
   }
 
   @HostListener('focusout')
   onFocusOut() {
-    this.open = false;
+    this.menuState = 'closed';
   }
 
   constructor() { }

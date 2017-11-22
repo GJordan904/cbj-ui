@@ -3,7 +3,7 @@
         {{toggleTitle}}
         <i *ngIf="arrow" class="material-icons md-1">keyboard_arrow_down</i>
     </button>
-    <div class="cbj-menu" [ngClass]="{open: open}">
+    <div class="cbj-menu" [@toggleMenu]="menuState">
         <ng-content></ng-content>
     </div>
 </div>

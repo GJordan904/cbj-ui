@@ -144,20 +144,16 @@
   display: inline-flex;
 
   .cbj-menu {
-    width: 0%;
     border-radius: 2.5%;
     position: absolute;
+    width: 100%;
     top: 0;
     left: 0;
     padding: 0;
     background: #fff;
-    transition: height 350ms ease-in-out, width 350ms 350ms ease-out;
+    transition: all 350ms ease-in-out;
     overflow: hidden;
     @include elevation-3;
-
-    &.open {
-      width: 100%;
-    }
 
     .cbj-menu-item {
       display: block;

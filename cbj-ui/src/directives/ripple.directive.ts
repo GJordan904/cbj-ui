@@ -16,7 +16,7 @@ export class RippleDirective implements OnInit, AfterViewInit {
     this.rippleStart(e);
   }
 
-  @HostListener('mousedown', ['$event'])
+  @HostListener('click', ['$event'])
   onMouseDown(e: MouseEvent) {
     this.rippleStart(e);
   }
@@ -37,7 +37,7 @@ export class RippleDirective implements OnInit, AfterViewInit {
       color: 'white',
       opacity: 0.25,
       shadow: 'none',
-      expandTime: .35,
+      expandTime: .25,
       collapseTime: .4,
       size: 0
     };
