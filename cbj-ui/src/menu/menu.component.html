@@ -4,6 +4,6 @@
         <i *ngIf="arrow" class="material-icons md-1">keyboard_arrow_down</i>
     </button>
     <div class="cbj-menu" [@toggleMenu]="menuState">
-        <ng-content></ng-content>
+        <button *ngFor="let item of options.items" [cbjMenuItem]="item.name">{{item.name}}</button>
     </div>
 </div>

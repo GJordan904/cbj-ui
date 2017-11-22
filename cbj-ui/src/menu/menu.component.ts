@@ -8,8 +8,11 @@ import {toggleMenu} from '../animations/menu';
   animations: [ toggleMenu() ]
 })
 export class CbjMenuComponent implements AfterContentInit {
-  @Input('arrow')arrow: boolean;
-  @Input('title')title: string | boolean;
+  @Input('options') options = {
+    arrow: false,
+    title: 'Menu',
+    items: [],
+  };
   @ContentChildren(CbjMenuItemDirective) items: QueryList<CbjMenuItemDirective>;
   toggleClasses: {};
   toggleTitle: string;
@@ -28,8 +31,8 @@ export class CbjMenuComponent implements AfterContentInit {
   constructor() { }
 
   ngAfterContentInit() {
-    if (typeof this.title === 'string') {
-      this.toggleTitle = this.title;
+    if (typeof this.options.title === 'string') {
+      this.toggleTitle = this.options.title;
     }else {
       this.items.toArray().forEach((item, index) => {
         item.active = false;

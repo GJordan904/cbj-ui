@@ -1,9 +1,7 @@
 <div class="card">
     <div class="dtTitle">
         <ng-container *ngIf="config.multiData; else singleTitle">
-            <cbj-menu [arrow]="true" [title]="false">
-                <button *ngFor="let data of multiData" [cbjMenuItem]="data.name">{{data.name}}</button>
-            </cbj-menu>
+            <cbj-menu [options]="{arrow: true, title: false, items: menuItems}"></cbj-menu>
         </ng-container>
         <ng-template #singleTitle>
             <h4>{{config.title}}</h4>

@@ -18,6 +18,7 @@ export class DatatableComponent implements OnInit {
   config: DatatableOptions;
   columns: Array<DatableColumn> = [];
   rows: Array<any> = [];
+  menuItems:  Array<any> = [];
   private multiData: Array<DatatableMultiData>;
   private multiColumns: Array<Array<DatableColumn>>;
   private multiDataCount = 0;
@@ -48,6 +49,7 @@ export class DatatableComponent implements OnInit {
         if (this.config.multiData) {
           this.rows = resp.data[0];
           this.multiData = resp.data;
+          this.initMenu();
         }else {
           this.rows = resp.data;
         }
@@ -56,9 +58,18 @@ export class DatatableComponent implements OnInit {
       if (this.config.multiData) {
         this.rows = this.config.data[0].data;
         this.multiData = this.config.data;
+        this.initMenu();
       }else {
         this.rows = this.config.data;
       }
+    }
+  }
+
+  private initMenu() {
+    for (const data of this.multiData) {
+      this.menuItems.push({
+        name: data.name
+      });
     }
   }
 
