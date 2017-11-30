@@ -1,0 +1,83 @@
+.indicator {
+  height: .25rem;
+  border-radius: 5%;
+  width: 80%;
+  position: absolute;
+  bottom: -.12rem;
+  background-color: theme-color(success);
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+.nav-item {
+  cursor: pointer;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    top: .5rem;
+    left: 10%;
+  }
+}
+/**
+ * Cards
+ */
+.card {
+  @include elevation-2;
+}
+.nav-card {
+  .nav-tabs {
+    .nav-link {
+      border: none;
+      padding-left: 4rem;
+
+      &.active {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+/**
+ * Card Deck Overrides
+ *
+ *
+ */
+.card-deck {
+  display: flex;
+  flex-direction: column;
+
+  .card {
+    margin-bottom: $card-deck-margin;
+  }
+
+  @include media-breakpoint-down(sm) {
+    display: flex;
+    flex-direction: column;
+    margin-right:0;
+    margin-left: 0;
+
+    .card {
+      display: block;
+      margin-bottom: $card-deck-margin;
+      margin-right:0;
+      margin-left: 0;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    flex-flow: row wrap;
+    margin-right: -$card-deck-margin;
+    margin-left: -$card-deck-margin;
+
+    .card {
+      display: flex;
+      // Flexbugs #4: https://github.com/philipwalton/flexbugs#4-flex-shorthand-declarations-with-unitless-flex-basis-values-are-ignored
+      flex: 1 0 0%;
+      flex-direction: column;
+      margin-right: $card-deck-margin;
+      margin-bottom: 0; // Override the default
+      margin-left: $card-deck-margin;
+    }
+  }
+}

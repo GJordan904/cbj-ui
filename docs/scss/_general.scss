@@ -1,0 +1,10 @@
+.vars-list {
+  list-style: none;
+  padding-left: -1.5rem;
+
+  .var {
+    padding: .25rem;
+    background-color: $black;
+    color: #9876aa;
+  }
+}

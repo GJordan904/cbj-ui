@@ -1,0 +1,19 @@
+<div class="cbj-dropdown" (focusout)="toggleMenu($event)">
+    <button class="btn"
+            cbjRipple
+            [ngClass]="toggleClasses"
+            (click)="toggleMenu()"
+    >
+        {{toggleTitle}}
+        <i *ngIf="options.arrow" class="material-icons md-1">keyboard_arrow_down</i>
+    </button>
+    <div class="cbj-menu" [@collapse]="menuState">
+        <button *ngFor="let item of items; trackBy: trackByFn"
+                [ngClass]="{active: item.active}"
+                class="cbj-menu-item"
+                (click)="itemClick(item)"
+        >
+            {{item.title}}
+        </button>
+    </div>
+</div>

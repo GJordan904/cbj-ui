@@ -1,0 +1,21 @@
+.card {
+  background-color: theme-color(primary);
+
+  a {
+    color: theme-color(secondary);
+  }
+}
+
+.nav-card {
+
+  .nav-tabs {
+
+    .nav-link {
+
+      &.active {
+        color: darken($white, 10%);
+        background-color: rgba(0, 0, 0, .15);
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<div class="container-fluid px-0 pb-4">
+  <div class="jumbotron jumbotron-fluid bg-primary text-white text-center">
+    <img src="/assets/img/cbj-ui-lg.png">
+    <h1 class="mt-3">
+      <span class="sub">Angular, and Bootstrap, and Material Design. Oh My!</span>
+    </h1>
+    <a routerLink="/getting-started" [cbjRipple]="{opacity: .25}" class="btn raised btn-dark mt-5 mr-2">
+      Get Started
+    </a>
+    <a [cbjRipple]="{opacity: .25}"
+       class="btn raised btn-secondary mt-5 ml-2"
+       href="https://github.com/gjordan904/cbj-ui"
+       target="_blank"
+    >
+      Github
+    </a>
+  </div>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">CBJ UI</h1>
+            <p class="card-text">
+              Angular 5 modules for common UI elements and Bootstrap 4 components, all with a
+              beautiful Material Design look. Everything is pure Angular, no jQuery and no 3rd party dependencies.
+            </p>
+            <p class="card-text">
+              This project aims to provide a few things:
+            </p>
+            <ul>
+              <li>Bootstraps jQuery Functionality</li>
+              <li>Additional Common UI Components & Directives</li>
+              <li>Material Design Theme</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-deck mt-4">
+
+        <div class="card">
+          <div class="d-flex justify-content-center pt-4">
+            <div class="dev-icon angular xl"></div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Angular</h2>
+            <p class="card-text mt-2">
+              Built from the ground up using the latest Angular CLI, CBJ UI has no external JS dependencies but instead leverages
+              the power of native Angular functionality.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="card bg-secondary">
+          <div class="d-flex justify-content-center pt-4">
+            <div class="dev-icon bootstrap xl"></div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Bootstrap 4</h2>
+            <p class="card-text mt-2">
+              I utilize Bootstrap 4 for the grid and base styles with some minor adjustments to get the material design look
+              I'm going for.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="d-flex justify-content-center pt-4">
+            <img src="/assets/img/material-design-logo.png" class="img-fluid">
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">Material Design</h2>
+            <p class="card-text mt-2">
+              The Material Design spec heavily influenced my styles for this project and I try to stick to the spec throughout.
+            </p>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>

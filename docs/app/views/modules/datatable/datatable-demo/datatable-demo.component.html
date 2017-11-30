@@ -1,0 +1,36 @@
+<div class="jumbotron jumbotron-fluid bg-primary text-white text-center">
+  <h1>
+    Data Table Component
+    <span class="sub">A Simple Data Table</span>
+  </h1>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Overview</h2>
+      <p class="card-text">
+        Outside of using Angular, I would frequently use the jQuery Data Tables plugin and found it very useful.
+        For this project, I didn't want to have any external dependencies and I certainly wasn't going to use jQuery,
+        so rolling my own was the answer. Currently it is a very simplistic data table but I plan to develop it more and
+        most likely move it to its own package.
+      </p>
+      <p class="card-text">
+        The component has a single attribute, <code class="p-1"><span class="token variable">options</span></code>, that
+        is used to pass the data and configuration options to the table. This attribute should utilize the <code class="p-1"><span class="token variable">DatatableOptions</span></code>
+        interface.
+      </p>
+
+      <h3 class="card-title">Data Source</h3>
+      <p class="card-text">
+        The table accepts either an array of data, an array of Objects using the <code class="p-1"><span class="token variable">DatatableMultiData</span></code>
+        interface, or a url string to request data from. Regardless of the data source, the structure of the data itself is not
+        implied and to properly present the data, a coordinating columns array must exist for each data source.
+      </p>
+      <h3 class="card-title">Columns</h3>
+      <p class="card-text">
+        The columns property of the DatatableOptions object should either a <code class="p-1"><span class="token variable">DatatableColumn[]</span></code>
+        or in the case of MultiData a  <code class="p-1"><span class="token variable">DatatableColumn[][]</span></code>
+      </p>
+    </div>
+  </div>
+</div>

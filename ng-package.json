@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "src": "cbj-ui",
-  "dest": "dist/cbj-ui",
+  "dest": "dist/ui",
   "workingDirectory": ".ng_build",
   "lib": {
-    "entryFile": "src/index.ts"
+    "entryFile": "index.ts"
   }
 }

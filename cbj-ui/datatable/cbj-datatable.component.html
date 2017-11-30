@@ -1,0 +1,40 @@
+<div class="card" [ngClass]="config.cardClasses">
+    <div class="dtTitle">
+        <ng-container *ngIf="config.multiData; else singleTitle">
+            <cbj-menu [options]="{arrow: true, title: false}" [items]="menuItems"></cbj-menu>
+        </ng-container>
+        <ng-template #singleTitle>
+            <h4>{{config.title}}</h4>
+        </ng-template>
+    </div>
+    <div class="dtTable" [ngClass]="config.classes">
+        <div class="dtTable-row dtTable-header">
+            <div *ngFor="let col of columns"
+                 class="dtTable-row-cell"
+                 [ngStyle]="{'flex-grow': col.flex}"
+            >
+                {{col.name}}
+                <ng-container *ngIf="col.sortable">
+                    <i *ngIf="col.sorted; else notSorted" class="material-icons md-1" [ngClass]="col.sortOrd === 'desc' ? 'down' : ''">arrow_upward</i>
+                    <ng-template #notSorted>
+                        <i class="material-icons md-1"></i>
+                    </ng-template>
+                </ng-container>
+            </div>
+        </div>
+        <div *ngFor="let row of rows" class="dtTable-row">
+            <div *ngFor="let data of columns"
+                 class="dtTable-row-cell"
+                 [id]="data.name"
+                 [ngStyle]="{'flex-grow': data.flex}"
+            >
+                <span *ngIf="isString(data.data); else elseBlock">
+                    {{row[data.data]}}
+                </span>
+                <ng-template #elseBlock>
+                    <span [innerHTML]="data.data(row)"></span>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

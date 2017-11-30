@@ -1,0 +1,32 @@
+/**
+ * Menu
+ */
+.cbj-dropdown {
+  position: relative;
+  display: inline-flex;
+
+  .cbj-menu {
+    border-radius: 2.5%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    background: #fff;
+    transition: all 350ms ease-in-out;
+    overflow: hidden;
+    @include elevation-3;
+
+    .cbj-menu-item {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: .75rem .5rem;
+
+      &.active {
+        background-color: rgba($black, 0.25);
+      }
+    }
+  }
+}

@@ -1,13 +1,13 @@
 {
-  "name": "@cbj/ui",
-  "description": "Angular 5 UI Components using Bootstrap 4",
+  "name": "@codebyjordan/ui-demo",
+  "description": "Docs & Demo App for @codebyjordan/ui",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:app": "cpr dist/cbj-ui src/@codebyjordan/ui && ng build --app packages && rimraf src/@codebyjordan",
+    "build:app": "cp -R dist/ui docs/@codebyjordan/ui && ng build && rimraf docs/@codebyjordan",
     "build:lib": "ng-packagr",
     "test": "ng test",
     "lint": "ng lint",
@@ -27,6 +27,7 @@
     "core-js": "^2.4.1",
     "prismjs": "^1.8.4",
     "rxjs": "^5.5.2",
+    "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -51,6 +52,6 @@
     "rimraf": "^2.6.1",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": ">=2.4.2 <2.5.0"
   }
 }
