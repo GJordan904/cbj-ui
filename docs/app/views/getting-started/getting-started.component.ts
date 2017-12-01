@@ -41,7 +41,7 @@ export class SharedModule { }`};
   stylesCode = {language: 'scss', code: `// styles.scss
 @import './your/custom/variables';
 @import '~bootstrap/scss/bootstrap';
-@import '~@cbj/ui/scss/cbj-ui';
+@import '~@codebyjordan/ui/scss/cbj-ui';
 ...`};
 
   constructor() { }

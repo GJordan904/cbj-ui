@@ -18,6 +18,12 @@
       color: $gray-700;
       font-size: .95rem
     }
+
+    &.dtTable-row {
+      &:hover {
+        background-color: $white;
+      }
+    }
   }
   // .Table-row
   &-row {

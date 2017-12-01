@@ -1,5 +1,5 @@
 <div class="card" [ngClass]="config.cardClasses">
-    <div class="dtTitle">
+    <div *ngIf="config.multiData || config.title" class="dtTitle">
         <ng-container *ngIf="config.multiData; else singleTitle">
             <cbj-menu [options]="{arrow: true, title: false}" [items]="menuItems"></cbj-menu>
         </ng-container>

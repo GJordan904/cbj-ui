@@ -1,12 +1,11 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DatatableOptions} from '@codebyjordan/ui';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-layout-demo',
   templateUrl: './layout-demo.component.html',
-  styleUrls: ['./layout-demo.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./layout-demo.component.scss']
 })
 export class LayoutDemoComponent implements OnInit {
   baseTempHighlightOpt = {
@@ -127,13 +126,12 @@ export class AppComponent {
       columns: [
         [
           {name: 'Name', data: 'name', flex: 1},
-          {
-            name: 'Type', flex: 1, data: (row) => {
-            if (row.link) {
-              return this.sanitizer.bypassSecurityTrustHtml(`<a href="${row.link}">${row.type}</a>`);
+          {name: 'Type', flex: 1, data: (row) => {
+              if (row.link) {
+                return this.sanitizer.bypassSecurityTrustHtml(`<a href="${row.link}">${row.type}</a>`);
+              }
+              return `${row.type}`;
             }
-            return `${row.type}`;
-          }
           },
           {name: 'Description', data: 'description', flex: 2}
         ],
@@ -181,7 +179,8 @@ export class AppComponent {
           },
           {
             name: 'main-content',
-            description: 'The main content section. Many times a simple <router-outlet main-content></router-outlet> is all thats needed here',
+            description: `The main content section. Many times a simple 
+            <router-outlet main-content></router-outlet> is all thats needed here`,
           }
         ]
         }

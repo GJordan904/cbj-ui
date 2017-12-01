@@ -3,7 +3,6 @@ import {DatableColumn, DatatableOptions, MenuItem} from '../models';
 import {HttpClient} from '@angular/common/http';
 
 const DEFAULTS = {
-  title: 'Table',
   serverSide: false,
   multiData: false,
   classes: '',
