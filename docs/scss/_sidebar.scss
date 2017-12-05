@@ -5,10 +5,11 @@
     background-color: transparent;
 
     .list-group-item {
-      background-color: lighten($dark, 5%);
+      background-color: transparent;
       color: $white;
 
       &.active {
+        background-color: transparent;
         color: theme-color(primary);
         border: none;
       }

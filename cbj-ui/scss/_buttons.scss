@@ -6,16 +6,17 @@
   align-items: center;
   display: inline-flex;
   background: transparent;
-  color: $white;
-  border-radius: 2px;
+  color: $flat-btn-color;
+  border-radius: $cbj-btn-border-radius;
+  text-transform: $btn-text-transform;
 
   .material-icons {
     margin: 0 .25rem;
   }
 
   &:active, &:focus {
-    background-color: rgba($gray-600, .5);
-    color: $gray-300;
+    background-color: $flat-btn-active-bg;
+    color: $flat-btn-active-color;
   }
 
   @each $color, $value in $theme-colors {
@@ -25,20 +26,20 @@
 
       &:active, &:focus {
         background-color: $value;
-        color: $body-color;
+        color: $flat-variant-active-color;
       }
     }
   }
 
   &.raised {
     @include elevation-action;
-    background-color: $white;
-    color: $black;
+    background-color: $raised-btn-bg;
+    color: $raised-btn-color;
 
     @each $color, $value in $theme-colors {
       &.btn-#{$color} {
         background-color: $value;
-        color: $white;
+        color: $raised-variant-color;
       }
     }
 

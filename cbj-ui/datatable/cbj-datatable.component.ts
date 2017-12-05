@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DatableColumn, DatatableOptions, MenuItem} from '../models';
+import {DatatableColumn, DatatableMultiData, DatatableOptions, MenuItem} from '../models';
 import {HttpClient} from '@angular/common/http';
 
 const DEFAULTS = {
@@ -16,17 +16,19 @@ const DEFAULTS = {
 export class CbjDatatableComponent implements OnInit {
   @Input('options')options: DatatableOptions;
   config: DatatableOptions;
-  columns: Array<DatableColumn> = [];
-  rows: Array<any> = [];
-  menuItems:  Array<MenuItem> = [
+  menuItems:  MenuItem[];
+  isMobile: boolean;
 
-  ];
-  private multiData: any;
-  private multiColumns: Array<Array<DatableColumn>>;
+  columns: DatatableColumn[] = [];
+  rows: any[] = [];
+
+  private multiData: DatatableMultiData[];
+  private multiColumns: DatatableColumn[][];
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.measure();
     this.config = {
       ...DEFAULTS,
       ...this.options
@@ -35,16 +37,25 @@ export class CbjDatatableComponent implements OnInit {
     this.initRows();
   }
 
+  private measure() {
+  }
+
   private initCols() {
     if (this.config.multiData) {
-      for (const col of (<DatableColumn[]>this.config.columns[0])) {
-        this.pushCol(col);
+      if (this.config.columns[0] instanceof Array) {
+        for (const col of <DatatableColumn[]>this.config.columns[0]) {
+          this.pushCol(col);
+        }
+        this.multiColumns = <DatatableColumn[][]>this.config.columns;
+      } else {
+        for (const col of <DatatableColumn[]>this.config.columns) {
+          this.pushCol(col);
+        }
       }
-      this.multiColumns = (<DatableColumn[][]>this.config.columns);
-      this.multiData = this.config.data;
+      this.multiData = <DatatableMultiData[]>this.config.data;
       this.initMenu();
     } else {
-      for (const col of (<DatableColumn[]>this.config.columns)) {
+      for (const col of <DatatableColumn[]>this.config.columns) {
         this.pushCol(col);
       }
     }
@@ -67,6 +78,7 @@ export class CbjDatatableComponent implements OnInit {
   }
 
   private initMenu() {
+    this.menuItems = [];
     let i = 0;
     for (const data of this.multiData) {
       this.menuItems.push({
@@ -79,28 +91,17 @@ export class CbjDatatableComponent implements OnInit {
     }
   }
 
-  private dumpCols() {
-    for (const col of this.columns) {
-      this.columns.pop();
-    }
-  }
-
-  private dumpRows() {
-    for (const row of this.rows) {
-      this.rows.pop();
-    }
-  }
-
   private setAjaxRows(url: string) {
     this.http.get(url).subscribe((resp: any) => {
       this.rows = resp.data;
     });
   }
 
-  pushCol(col: DatableColumn) {
+  pushCol(col: DatatableColumn) {
     this.columns.push({
       name: col.name,
       data: col.data,
+      keys: col.keys === undefined ? undefined : col.keys,
       flex: col.flex === undefined ? 1 : col.flex,
       sortable: col.sortable === undefined ? true : col.sortable,
       filterable: col.filterable === undefined ? true : col.filterable,
@@ -115,7 +116,9 @@ export class CbjDatatableComponent implements OnInit {
   }
 
   changeData = (item: any) => {
-    this.columns = this.multiColumns[item.id];
+    if (this.config.columns[0] instanceof Array) {
+      this.columns = this.multiColumns[item.id];
+    }
     if (typeof this.config.data[item.id].data === 'string')  {
       this.setAjaxRows(this.config.data[item.id].data);
     } else {

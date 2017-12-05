@@ -9,7 +9,7 @@
 <div class="container-fluid pb-4">
   <div class="row">
     <div class="col-lg-10 mx-lg-auto">
-      <div class="card">
+      <div class="card bg-primary">
         <h2 class="card-header">Install</h2>
         <div class="card-body">
           <div class="card-text">
@@ -27,10 +27,13 @@
 
   <div class="row mt-4">
     <div class="col-lg-10 mx-lg-auto">
-      <div class="card">
+      <div class="card bg-primary">
         <h2 class="card-header">Configure</h2>
         <div class="card-body">
-          <h3>Angular</h3>
+          <h3>
+            <span class="dev-icon angular tiny"></span>
+            Angular
+          </h3>
           <p class="card-text">
             Once installed, CBJ UI needs to be imported into your app module using the forRoot() method:
           </p>
@@ -40,7 +43,15 @@
             functionality in other modules, you can import individual modules as needed or simply import the CbjUiModule
             again but be sure to only use the forRoot() method in the App Module.
           </p>
-          <h4>Shared Module</h4>
+
+          <h4 class="mt-4">Configuration Options</h4>
+          <p class="card-text">
+            The forRoot method takes an optional configuration object using the <code class="p-1"><span class="token variable">CbjUiConfig</span></code>
+            interface. Currently this only consists of a single property, <code class="p-1"><span class="token variable">tableComponents</span></code>,
+            that accepts an array of components to be registered for use in the <a routerLink="/datatable/component">Data Table Component</a>.
+          </p>
+
+          <h4 class="mt-4">Shared Module</h4>
           <p class="card-text">
             If you have multiple modules across which you want to use this package, a recommended pattern would be to
             implement a <a href="https://angular.io/guide/ngmodule#shared-modules" target="_blank">shared module</a>. First, import the CbjUiModule into your App Module as outlined above. Then, create
@@ -52,7 +63,10 @@
             export these modules but they are pretty common and usually find their way into my shared module.
           </p>
 
-          <h3 class="mt-4">Bootstrap</h3>
+          <h3 class="mt-4">
+            <span class="dev-icon bootstrap tiny"></span>
+            Bootstrap
+          </h3>
           <p class="card-text">
             CBJ UI was built to be used with Bootstrap 4 during the development of your project. The styles are in SCSS
             and make extensive use of the Bootstrap mixins and variables. This makes for easy theme customization with the
@@ -64,6 +78,11 @@
             UI settings.
           </p>
           <pre><code [cbjHighlight]="stylesCode" [innerHTML]="stylesCode.code"></code></pre>
+
+          <h4 class="mt-4">Customizing</h4>
+          <p class="card-text">
+            The easiest way to get started customizing the
+          </p>
         </div>
       </div>
     </div>

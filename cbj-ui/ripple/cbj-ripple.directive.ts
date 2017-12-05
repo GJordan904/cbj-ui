@@ -18,6 +18,7 @@ export class CbjRippleDirective implements OnInit, AfterViewInit {
 
   @HostListener('click', ['$event'])
   onMouseDown(e: MouseEvent) {
+    console.log('clicked ripple');
     this.rippleStart(e);
   }
 

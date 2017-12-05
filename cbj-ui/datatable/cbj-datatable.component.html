@@ -1,4 +1,5 @@
 <div class="card" [ngClass]="config.cardClasses">
+
     <div *ngIf="config.multiData || config.title" class="dtTitle">
         <ng-container *ngIf="config.multiData; else singleTitle">
             <cbj-menu [options]="{arrow: true, title: false}" [items]="menuItems"></cbj-menu>
@@ -7,7 +8,9 @@
             <h4>{{config.title}}</h4>
         </ng-template>
     </div>
+
     <div class="dtTable" [ngClass]="config.classes">
+
         <div class="dtTable-row dtTable-header">
             <div *ngFor="let col of columns"
                  class="dtTable-row-cell"
@@ -22,19 +25,22 @@
                 </ng-container>
             </div>
         </div>
+
         <div *ngFor="let row of rows" class="dtTable-row">
             <div *ngFor="let data of columns"
                  class="dtTable-row-cell"
                  [id]="data.name"
                  [ngStyle]="{'flex-grow': data.flex}"
             >
-                <span *ngIf="isString(data.data); else elseBlock">
-                    {{row[data.data]}}
-                </span>
-                <ng-template #elseBlock>
-                    <span [innerHTML]="data.data(row)"></span>
+
+                <ng-container *ngIf="isString(data.data); else compCell">
+                    <span [innerHTML]="row[data.data]"></span>
+                </ng-container>
+                <ng-template #compCell>
+                    <ng-template [cbjCompCell]="{row: row, component: data.data, keys: data.keys}"></ng-template>
                 </ng-template>
             </div>
         </div>
+
     </div>
 </div>

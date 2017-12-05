@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
-import {SidebarLink, SidebarLinks, SidebarLinkTypes} from '../models';
+import {AfterViewInit, Component, HostListener, Inject, Input, OnInit} from '@angular/core';
+import {ScrollBarOptions, SidebarLink, SidebarLinks, SidebarLinkTypes} from '../models';
 import {fade} from '../animations';
+import {WINDOW} from '../services';
 
 @Component({
   selector: 'cbj-layout',
@@ -11,13 +12,18 @@ export class CbjLayoutComponent implements OnInit, AfterViewInit {
   @Input('useSidebar')useSidebar: boolean;
   @Input('navbarClasses')navbarClasses: string;
   @Input('sidebarLinks')sidebarLinks: SidebarLinks;
+  @Input()scrollbarOptions: ScrollBarOptions;
+
   sidebarOpen: boolean;
   isMobile: boolean;
+
   linkClasses = {
     heading: 'list-group-item heading',
     dropdown: 'list-group-item dropdown',
     link: 'list-group-item'
   };
+
+  constructor(@Inject(WINDOW) private window: Window) {}
 
   @HostListener('window:resize')
   onResize() {
@@ -41,6 +47,6 @@ export class CbjLayoutComponent implements OnInit, AfterViewInit {
   }
 
   private setMobile() {
-    this.isMobile = window.innerWidth < 992;
+    this.isMobile = this.window.innerWidth < 992;
   }
 }

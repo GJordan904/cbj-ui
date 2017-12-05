@@ -36,7 +36,7 @@ export class CbjParallaxDirective extends ManageVisibility {
 
     const scrollTrigger = this.offsetTop - winHeight;
 
-    if (!this.eivVisible && this.scroll.pos >= scrollTrigger) {
+    if (!this.eivVisible && this.scroll.scrollPos >= scrollTrigger) {
       this.eivVisible = true;
 
     }
@@ -45,7 +45,7 @@ export class CbjParallaxDirective extends ManageVisibility {
       let resultVal: string;
       let calcVal: number;
 
-      calcVal = ((this.scroll.pos * this.config.ratio) + this.config.startPosition) *  -1;
+      calcVal = ((this.scroll.scrollPos * this.config.ratio) + this.config.startPosition) *  -1;
 
       if (this.config.maxValue && calcVal >= this.config.maxValue) {
         calcVal = this.config.maxValue;
@@ -60,7 +60,7 @@ export class CbjParallaxDirective extends ManageVisibility {
       this.el.nativeElement.style['backgroundPosition'] = resultVal;
     }
 
-    if (this.eivVisible && this.scroll.pos < scrollTrigger) {
+    if (this.eivVisible && this.scroll.scrollPos < scrollTrigger) {
       this.eivVisible = false;
     }
   }

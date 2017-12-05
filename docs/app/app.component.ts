@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { SidebarLinks, SidebarLinkTypes } from '@codebyjordan/ui';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { SidebarLinks, SidebarLinkTypes, ScrollService } from '@codebyjordan/ui';
+import {ScrollBarOptions} from '../../cbj-ui/models';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements  OnInit, OnDestroy {
   sidebarLinks: SidebarLinks = {
     activeClass: 'active',
     links: [
@@ -45,11 +46,19 @@ export class AppComponent {
       },
       { text: 'Services', type: SidebarLinkTypes.HEADING },
       { link: '/services/scroll-service', text: 'Scroll Service', type: SidebarLinkTypes.LINK},
-      { text: 'Models', type: SidebarLinkTypes.HEADING },
-      { link: '/models/1', text: 'Datatable', type: SidebarLinkTypes.LINK},
-      { link: '/models/2', text: 'Layout', type: SidebarLinkTypes.LINK},
-      { link: '/models/3', text: 'Menu', type: SidebarLinkTypes.LINK},
-      { link: '/models/4', text: 'Scroll', type: SidebarLinkTypes.LINK},
     ]
   };
+
+  scrollbarOptions: ScrollBarOptions = {
+    isRoot: true,
+    alwaysVisible: true
+  };
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+  }
 }

@@ -1,6 +1,6 @@
 export interface DatatableOptions {
   data: string | any[] | DatatableMultiData[];
-  columns: DatableColumn[] | DatableColumn[][];
+  columns: DatatableColumn[] | DatatableColumn[][];
   title?: string;
   classes?: string;
   cardClasses?: string;
@@ -8,9 +8,10 @@ export interface DatatableOptions {
   multiData?: boolean;
 }
 
-export interface DatableColumn {
+export interface DatatableColumn {
   name: string;
-  data: string | Function;
+  data: any;
+  keys?: string[];
   flex?: number;
   sortable?: boolean;
   filterable?: boolean;
@@ -21,6 +22,13 @@ export interface DatableColumn {
 
 export interface DatatableMultiData {
   name: string;
-  data: string | Array<any>;
+  data: string | any[];
 }
+
+export interface ComponentCellOptions {
+  row: any;
+  component: any;
+  keys: string[];
+}
+
 

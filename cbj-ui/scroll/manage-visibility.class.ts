@@ -1,5 +1,5 @@
 import {Subject} from 'rxjs/Subject';
-import {ScrollService} from '../services/scroll.service';
+import {ScrollService} from '../services';
 import {AfterViewInit, ElementRef, OnDestroy, OnInit} from '@angular/core';
 
 export class ManageVisibility implements OnInit, AfterViewInit, OnDestroy {
@@ -24,7 +24,7 @@ export class ManageVisibility implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(() => this.manageVisibility());
   }
 
-  ngOnDestroy():void {
+  ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

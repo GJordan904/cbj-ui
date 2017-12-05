@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {CbjScrollbarDirective} from './cbj-scrollbar.directive';
 import {CbjInViewDirective} from './cbj-in-view.directive';
 import {CbjParallaxDirective} from './cbj-parallax.directive';
-import {CbjAnimInViewComponent} from './anim-in-view/cbj-anim-in-view.component';
+import {CbjAnimInViewComponent} from './anim-in-view';
 import {CommonModule} from '@angular/common';
 
 @NgModule({

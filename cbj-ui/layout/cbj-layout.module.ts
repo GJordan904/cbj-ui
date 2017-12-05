@@ -3,12 +3,14 @@ import {CbjLayoutComponent} from './cbj-layout.component';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {CbjRippleModule} from '../ripple';
+import {CbjScrollModule} from '../scroll';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    CbjRippleModule
+    CbjRippleModule,
+    CbjScrollModule
   ],
   declarations: [
     CbjLayoutComponent

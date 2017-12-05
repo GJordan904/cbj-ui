@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DatatableOptions} from '@codebyjordan/ui';
 import {DomSanitizer} from '@angular/platform-browser';
+import {CbjLinkCellComponent} from '../../../../../../cbj-ui/datatable';
 
 @Component({
   selector: 'app-layout-demo',
@@ -126,21 +127,12 @@ export class AppComponent {
       columns: [
         [
           {name: 'Name', data: 'name', flex: 1},
-          {name: 'Type', flex: 1, data: (row) => {
-              if (row.link) {
-                return this.sanitizer.bypassSecurityTrustHtml(`<a href="${row.link}">${row.type}</a>`);
-              }
-              return `${row.type}`;
-            }
-          },
+          {name: 'Type', flex: 1, data: CbjLinkCellComponent, keys: ['link', 'type'] },
           {name: 'Description', data: 'description', flex: 2}
         ],
         [
           { name: 'Attribute', data: 'name'},
           { name: 'Description', data: 'description', flex: 3}
-        ],
-        [
-
         ]
       ],
       data: [
@@ -148,7 +140,8 @@ export class AppComponent {
           name: 'Inputs', data: [
             {
               name: 'navbarClasses',
-              type: 'string',
+              type: '<code class="p-1"><span class="token keyword">string</span></code>',
+              link: '',
               description: 'Classes to be applied to the navbar in addition to the navbar class.',
             },
             {

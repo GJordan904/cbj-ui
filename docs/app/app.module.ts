@@ -35,7 +35,7 @@ import { GettingStartedComponent } from './views/getting-started/getting-started
     ModelsPreviewComponent,
     DatatableDemoComponent,
     MenuDemoComponent,
-    GettingStartedComponent,
+    GettingStartedComponent
   ],
   imports: [
     BrowserModule,

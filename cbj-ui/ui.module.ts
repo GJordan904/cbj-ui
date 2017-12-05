@@ -1,14 +1,14 @@
-import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Optional, Provider, SkipSelf} from '@angular/core';
+import {ScrollService, WINDOW} from './services';
+import {CbjScrollModule} from './scroll';
+import {CbjMenuModule} from './menu';
+import {CbjPipesModule} from './pipes';
+import {CbjRippleModule} from './ripple';
+import {CbjDatatableModule, CbjLinkCellComponent} from './datatable';
+import {CbjNavsModule} from './navs';
+import {CbjLayoutModule} from './layout';
+import {CbjUiConfig} from './models';
 import {CommonModule} from '@angular/common';
-import {ScrollService} from './services/scroll.service';
-import {RouterModule} from '@angular/router';
-import {CbjScrollModule} from './scroll/cbj-scroll.module';
-import {CbjMenuModule} from './menu/cbj-menu.module';
-import {CbjPipesModule} from './pipes/cbj-pipes.module';
-import {CbjRippleModule} from './ripple/cbj-ripple.module';
-import {CbjDatatableModule} from './datatable/cbj-datatable.module';
-import {CbjNavsModule} from './navs/cbj-navs.module';
-import {CbjLayoutModule} from './layout/cbj-layout.module';
 
 @NgModule({
   exports: [
@@ -19,21 +19,32 @@ import {CbjLayoutModule} from './layout/cbj-layout.module';
     CbjDatatableModule,
     CbjNavsModule,
     CbjLayoutModule
-  ],
-  providers: [ScrollService]
+  ]
 })
 export class CbjUiModule {
   constructor (@Optional() @SkipSelf() parentModule: CbjUiModule) {
     if (parentModule) {
       throw new Error(
-        'CbjUiModule is already loaded. Import it in the AppModule only');
+        'CbjUiModule is already loaded. Import it with the forRoot method in the AppModule only');
     }
   }
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(config?: CbjUiConfig): ModuleWithProviders {
+    const providers: Provider[] = [
+      ScrollService,
+      {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: [CbjLinkCellComponent], multi: true},
+      {provide: WINDOW, useValue: window}
+    ];
+
+    if (config) {
+      if (config.tableComponents) {
+        providers.push({provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: config.tableComponents, multi: true});
+      }
+    }
+
     return {
       ngModule: CbjUiModule,
-      providers: [ ScrollService ]
+      providers: providers
     };
   }
 }

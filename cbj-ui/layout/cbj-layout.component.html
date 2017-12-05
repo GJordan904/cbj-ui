@@ -18,7 +18,10 @@
 
     <div class="site-inner">
 
-        <nav *ngIf="useSidebar" class="cbj-sidebar" [ngClass]="{open: sidebarOpen}">
+        <nav *ngIf="useSidebar"
+             class="cbj-sidebar"
+             [ngClass]="{open: sidebarOpen}"
+             [cbjScrollbar]="{wrapperClass: 'cbj-sidebar'}">
 
             <ng-content select="[sidebar-header]"></ng-content>
 
@@ -79,7 +82,7 @@
              [@fade]>
         </div>
 
-        <div class="main-content" [ngClass]="{open: sidebarOpen}">
+        <div class="main-content" [ngClass]="{open: sidebarOpen}" [cbjScrollbar]="scrollbarOptions">
 
             <ng-content select="[main-content]"></ng-content>
 

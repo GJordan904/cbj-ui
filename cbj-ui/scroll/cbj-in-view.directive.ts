@@ -1,5 +1,5 @@
 import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
-import {ScrollService} from '../services/scroll.service';
+import {ScrollService} from '../services';
 import {ManageVisibility} from './manage-visibility.class';
 
 @Directive({
@@ -20,7 +20,7 @@ export class CbjInViewDirective extends ManageVisibility{
 
     const scrollTrigger = this.offsetTop + 150 - winHeight;
 
-    if (!this.eivVisible && this.scroll.pos >= scrollTrigger) {
+    if (!this.eivVisible && this.scroll.scrollPos >= scrollTrigger) {
       this.eivVisible = true;
       this.show.emit(this.el);
       this.ngUnsubscribe.next();

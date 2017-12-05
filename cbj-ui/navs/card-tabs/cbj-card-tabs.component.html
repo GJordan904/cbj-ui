@@ -1,7 +1,7 @@
 <div [ngClass]="cardClasses" class="card nav-card">
     <div class="card-header">
         <ul [ngClass]="navClasses" class="nav nav-tabs card-header-tabs">
-            <li *ngFor="let tab of tabs" (click)="selectTab(tab)" class="nav-item">
+            <li *ngFor="let tab of tabs" (click)="selectTab(tab)" class="nav-item" cbjRipple>
                 <span *ngIf="tab.icon" [class]="tab.icon + ' icon'"></span>
                 <span class="nav-link" [ngClass]="{'active': tab.active}">{{tab.title}}</span>
                 <span *ngIf="tab.active" class="indicator"></span>

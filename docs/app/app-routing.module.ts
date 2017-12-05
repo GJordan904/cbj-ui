@@ -49,7 +49,6 @@ const routes: Routes = [
     { path: 'scroll-service', component: ScrollServiceDemoComponent },
   ]
   },
-  { path: 'models/{model}', component: ModelsPreviewComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home' }
 ];
 
