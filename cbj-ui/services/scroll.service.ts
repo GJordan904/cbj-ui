@@ -50,7 +50,7 @@ export class ScrollService implements OnDestroy {
       });
   }
 
-  public initDrag(el: HTMLElement, bar: HTMLElement, visibility?: Function): {start: Observable<any>, end: Observable<any>} {
+  public initDrag(el: HTMLElement, bar: HTMLElement): {start: Observable<any>, end: Observable<any>} {
     const mousemove = Observable.fromEvent(this.window, 'mousemove');
     const touchmove = Observable.fromEvent(this.window, 'touchmove');
 
@@ -65,9 +65,6 @@ export class ScrollService implements OnDestroy {
 
       return mousemove.map((emove: MouseEvent) => {
         emove.preventDefault();
-        if (visibility) {
-          visibility();
-        }
         return top + emove.pageY - pageY;
       }).takeUntil(mouseup);
     });

@@ -12,34 +12,58 @@
     <div class="dtTable" [ngClass]="config.classes">
 
         <div class="dtTable-row dtTable-header">
-            <div *ngFor="let col of columns"
-                 class="dtTable-row-cell"
-                 [ngStyle]="{'flex-grow': col.flex}"
-            >
-                {{col.name}}
-                <ng-container *ngIf="col.sortable">
-                    <i *ngIf="col.sorted; else notSorted" class="material-icons md-1" [ngClass]="col.sortOrd === 'desc' ? 'down' : ''">arrow_upward</i>
-                    <ng-template #notSorted>
-                        <i class="material-icons md-1"></i>
-                    </ng-template>
+            <ng-container *ngFor="let col of columns">
+                <ng-container *ngIf="!col.hidden">
+                    <div class="dtTable-row-cell"
+                         [ngStyle]="{'flex-grow': col.flex}"
+                    >
+                        {{col.name}}
+                        <ng-container *ngIf="col.sortable">
+                            <i *ngIf="col.sorted; else notSorted" class="material-icons md-1" [ngClass]="col.sortOrd === 'desc' ? 'down' : ''">arrow_upward</i>
+                            <ng-template #notSorted>
+                                <i class="material-icons md-1"></i>
+                            </ng-template>
+                        </ng-container>
+                    </div>
                 </ng-container>
-            </div>
+            </ng-container>
+            <ng-container *ngIf="colsHidden">
+                <div class="dtTable-row-cell" [ngStyle]="{'flex-shrink': 1}">
+                    More
+                </div>
+            </ng-container>
         </div>
 
-        <div *ngFor="let row of rows" class="dtTable-row">
-            <div *ngFor="let data of columns"
-                 class="dtTable-row-cell"
-                 [id]="data.name"
-                 [ngStyle]="{'flex-grow': data.flex}"
-            >
+        <div *ngFor="let row of visibleRows" class="dtTable-row">
+            <ng-container *ngFor="let col of columns">
+                <div *ngIf="!col.hidden"
+                     class="dtTable-row-cell"
+                     [ngStyle]="{'flex-grow': col.flex}">
 
-                <ng-container *ngIf="isString(data.data); else compCell">
-                    <span [innerHTML]="row[data.data]"></span>
-                </ng-container>
-                <ng-template #compCell>
-                    <ng-template [cbjCompCell]="{row: row, component: data.data, keys: data.keys}"></ng-template>
-                </ng-template>
-            </div>
+                    <ng-container *ngIf="isString(col.data); else compCell">
+                        <span [innerHTML]="row[col.data]"></span>
+                    </ng-container>
+                    <ng-template #compCell>
+                        <ng-template [cbjCompCell]="{row: row, component: col.data, keys: col.keys}"></ng-template>
+                    </ng-template>
+
+                </div>
+            </ng-container>
+            <ng-container *ngIf="colsHidden">
+                <div class="dtTable-row-cell">
+                    <div class="toggler" (click)="row.cbjState = row.cbjState === 'closed' ? 'open' : 'closed'">
+                        <i class="material-icons tiny">add_box</i>
+                        More Columns
+                    </div>
+                </div>
+                <div class="dtTable-row-hidden" [@collapse]="row.cbjState">
+                    <ul class="cols-list">
+                        <ng-container *ngFor="let col of columns">
+                            <li *ngIf="col.hidden && isString(col.data)" class="col"><span class="col-name">{{col.name}}:</span>{{row[col.data]}}</li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </ng-container>
         </div>
 
     </div>

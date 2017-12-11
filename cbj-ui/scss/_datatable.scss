@@ -33,7 +33,7 @@
   // .Table-row
   &-row {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     width: 100%;
 
     &:hover {
@@ -49,6 +49,12 @@
       flex-basis: 0;
       align-items: center;
       padding: 0.5em;
+    }
+
+    &-hidden {
+      display: block;
+      overflow: hidden;
+      width: 100%;
     }
   }
 

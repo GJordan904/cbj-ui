@@ -6,11 +6,13 @@ export interface DatatableOptions {
   cardClasses?: string;
   serverSide?: boolean;
   multiData?: boolean;
+  rowsPerPage?: number;
 }
 
 export interface DatatableColumn {
   name: string;
   data: any;
+  breakpoint?: number;
   keys?: string[];
   flex?: number;
   sortable?: boolean;
@@ -18,6 +20,7 @@ export interface DatatableColumn {
   searchable?: boolean;
   sortOrd?: string;
   sorted?: boolean;
+  hidden?: boolean;
 }
 
 export interface DatatableMultiData {

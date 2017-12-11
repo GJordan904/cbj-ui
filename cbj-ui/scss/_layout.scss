@@ -71,12 +71,11 @@
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  transform: translateX(-100%);
+  transform: translateX(-101%);
   z-index: 100;
 
   &.open {
     transform: translateX(0);
-    @include elevation-left-sidebar;
 
     @include media-breakpoint-up(sm) {
       width: 500px;
@@ -156,5 +155,5 @@
   transition: all 350ms ease-in-out;
   max-height: calc(100vh - #{$navbar-height});
   overflow-x: auto;
-  padding: 0 1rem 2rem 0;
+  padding: 0 0 2rem 0;
 }

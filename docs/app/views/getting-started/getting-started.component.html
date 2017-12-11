@@ -75,14 +75,10 @@
           <p class="card-text">
             The intended way of using the styles would be to import them into your main SCSS file right after importing
             Bootstrap. This way you can import your own variables file before Bootstrap and override any Bootstrap or CBJ
-            UI settings.
+            UI settings. To override the CBJ UI and Bootstrap defaults simply create a variables file and declare any of the
+            Bootstrap or CBJ UI variables then import that variables file, Bootstrap, and CBJ UI into your main .scss file like illustrated below
           </p>
           <pre><code [cbjHighlight]="stylesCode" [innerHTML]="stylesCode.code"></code></pre>
-
-          <h4 class="mt-4">Customizing</h4>
-          <p class="card-text">
-            The easiest way to get started customizing the
-          </p>
         </div>
       </div>
     </div>

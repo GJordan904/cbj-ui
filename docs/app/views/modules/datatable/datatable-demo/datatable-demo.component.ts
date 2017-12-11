@@ -34,7 +34,7 @@ export class BasicTableComponent implements OnInit {
 
   basicTemp = {
     language: 'markup',
-    code: `<cbj-datatable [options]="dtOptions"></cbj-datatable>`
+    code: `<cbj-datatable [config]="dtOptions"></cbj-datatable>`
   };
 
   multiDataComp = {
@@ -125,7 +125,7 @@ export class LayoutDemoComponent implements OnInit {
   };
   multiDataTemp = {
     language: 'markup',
-    code: `<cbj-datatable [options]="dtOptions"></cbj-datatable>`
+    code: `<cbj-datatable [config]="dtOptions"></cbj-datatable>`
   };
   apiDtOptions: DatatableOptions;
   modelsDtOptions: DatatableOptions;
@@ -157,7 +157,7 @@ export class LayoutDemoComponent implements OnInit {
         { name: 'Property', data: 'prop', flex: 1 },
         { name: 'Required', data: 'required', flex: .75 },
         { name: 'Type', data: 'type', flex: 1 },
-        { name: 'Description', data: 'description', flex: 2.5 }
+        { name: 'Description', data: 'description', flex: 2.5, breakpoint: 992 }
       ],
       data: [
         {
