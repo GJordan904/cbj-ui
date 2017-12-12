@@ -1,5 +1,5 @@
 import {ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Optional, Provider, SkipSelf} from '@angular/core';
-import {ScrollService, WINDOW} from './services';
+import {ScrollService, WINDOW, WindowService} from './services';
 import {CbjScrollModule} from './scroll';
 import {CbjMenuModule} from './menu';
 import {CbjPipesModule} from './pipes';
@@ -32,6 +32,7 @@ export class CbjUiModule {
   static forRoot(config?: CbjUiConfig): ModuleWithProviders {
     const providers: Provider[] = [
       ScrollService,
+      WindowService,
       {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: [CbjLinkCellComponent], multi: true},
       {provide: WINDOW, useValue: window}
     ];

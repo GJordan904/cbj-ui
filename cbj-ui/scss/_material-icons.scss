@@ -27,17 +27,12 @@
   &.md-8 {
     font-size: 8rem
   }
-
-  &.md-dark {
-    color: rgba(0, 0, 0, 0.54);
-    &.md-inactive {
-      color: rgba(0, 0, 0, 0.26);
-    }
-  }
-  &.md-light {
-    color: rgba(255, 255, 255, 1);
-    &.md-inactive {
-      color: rgba(255, 255, 255, 0.3);
+  @each $color, $value in $theme-colors {
+    &.md-#{$color} {
+      color: $value;
+      &.md-inactive {
+        color: rgba($value, 0.3);
+      }
     }
   }
 }

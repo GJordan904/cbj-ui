@@ -1,7 +1,7 @@
 import {Directive, ElementRef, Input} from '@angular/core';
-import {ScrollService} from '../services/scroll.service';
+import {ScrollService, WindowService} from '../services';
 import {ManageVisibility} from './manage-visibility.class';
-import {ParallaxConfig} from '../models/scroll.models';
+import {ParallaxConfig} from '../models';
 
 @Directive({
   selector: '[cbjParallax]'
@@ -9,8 +9,8 @@ import {ParallaxConfig} from '../models/scroll.models';
 export class CbjParallaxDirective extends ManageVisibility {
   @Input('cbjParallax')config: ParallaxConfig;
 
-  constructor(public el: ElementRef, public scroll: ScrollService) {
-    super(el, scroll);
+  constructor(public el: ElementRef, public scroll: ScrollService, public window: WindowService) {
+    super(el, scroll, window);
   }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class CbjParallaxDirective extends ManageVisibility {
    * check for visibility of element
    */
   manageVisibility(): void {
-    const winHeight = this.scroll.getWinHeight();
+    const winHeight = this.window.getWinHeight();
 
     const scrollTrigger = this.offsetTop - winHeight;
 

@@ -8,10 +8,10 @@ import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/map';
+import {WindowService} from './window.service';
 
 @Injectable()
 export class ScrollService implements OnDestroy {
-  resizeObs: Observable<any>;
   scrollObs: Observable<number>;
   scrollPos: number;
   scrollHeight: number;
@@ -21,7 +21,6 @@ export class ScrollService implements OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject();
 
   constructor(@Inject(WINDOW) private window: Window) {
-    this.resizeObs = Observable.fromEvent(this.window, 'resize');
     this.scrollObs = Observable.from(this.scrollSubj);
   }
 
@@ -51,13 +50,11 @@ export class ScrollService implements OnDestroy {
   }
 
   public initDrag(el: HTMLElement, bar: HTMLElement): {start: Observable<any>, end: Observable<any>} {
-    const mousemove = Observable.fromEvent(this.window, 'mousemove');
-    const touchmove = Observable.fromEvent(this.window, 'touchmove');
+    let observs;
 
+    const mousemove = Observable.fromEvent(this.window, 'mousemove');
     const mousedown = Observable.fromEvent(bar, 'mousedown');
-    const touchstart = Observable.fromEvent(el, 'touchstart');
     const mouseup = Observable.fromEvent(this.window, 'mouseup');
-    const touchend = Observable.fromEvent(this.window, 'touchend');
 
     const mousedrag = mousedown.mergeMap((e: MouseEvent) => {
       const pageY = e.pageY;
@@ -69,59 +66,31 @@ export class ScrollService implements OnDestroy {
       }).takeUntil(mouseup);
     });
 
-    const touchdrag = touchstart.mergeMap((e: TouchEvent) => {
-      const pageY = e.targetTouches[0].pageY;
-      const top = -parseFloat(getComputedStyle(bar).top);
-
-      return touchmove.map((tmove: TouchEvent) => {
-        return -(top + tmove.targetTouches[0].pageY - pageY);
-      }).takeUntil(touchend);
-    });
-
-    return {
-      start: Observable.merge(...[mousedrag, touchdrag]),
-      end: Observable.merge(...[mouseup, touchend])
+    observs = {
+      start: mousedrag,
+      end: mouseup
     };
-  }
 
-  /**
-   * get window height utility function
-   *
-   * @returns void
-   */
-  public getWinHeight(): number {
+    if (this.window.innerWidth <= 992) {
+      const touchmove = Observable.fromEvent(this.window, 'touchmove');
+      const touchstart = Observable.fromEvent(el, 'touchstart');
+      const touchend = Observable.fromEvent(this.window, 'touchend');
 
-    return this.scrollHeight;
+      const touchdrag = touchstart.mergeMap((e: TouchEvent) => {
+        const pageY = e.targetTouches[0].pageY;
+        const top = -parseFloat(getComputedStyle(bar).top);
 
-  }
+        return touchmove.map((tmove: TouchEvent) => {
+          return -(top + tmove.targetTouches[0].pageY - pageY);
+        }).takeUntil(touchend);
+      });
 
-  /**
-   * get offsetTop value for element
-   *
-   * @returns void
-   */
-  public getOffsetTop(el): number {
+      observs = {
+        start: Observable.merge(...[mousedrag, touchdrag]),
+        end: Observable.merge(...[mouseup, touchend])
+      };
+    }
 
-    const viewportTop = el.nativeElement.getBoundingClientRect().top;
-    const clientTop = el.nativeElement.clientTop;
-
-    // get vertical position for selected element
-    return viewportTop + this.scrollPos - clientTop;
-
-  }
-
-  /**
-   * get offsetBottom value for element
-   *
-   * @returns void
-   */
-  public getOffsetBottom(el): number {
-
-    const viewportTop = el.nativeElement.getBoundingClientRect().top;
-    const clientBottom = el.nativeElement.clientTop + el.nativeElement.clientHeight;
-
-    // get vertical position for selected element
-    return viewportTop + this.scrollPos - clientBottom;
-
+    return observs;
   }
 }

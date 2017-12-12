@@ -12,14 +12,17 @@
       <div class="card bg-primary">
         <h2 class="card-header">Install</h2>
         <div class="card-body">
-          <div class="card-text">
-            With NPM
-            <pre class="install-code"><code [cbjHighlight]="installCode" [innerHTML]="installCode.code"></code></pre>
-          </div>
-          <div class="card-text mt-2">
-            Clone Repo
-            <a cbjRipple class="btn btn-secondary raised" href="https://github.com/gjordan904/cbj-ui" target="_blank"><span class="dev-icon github tiny"></span></a>
-          </div>
+          <h4 class="card-title">With NPM</h4>
+          <pre class="install-code"><code [cbjHighlight]="installCode" [innerHTML]="installCode.code"></code></pre>
+
+          <h4 class="card-title mt-4">Build Source</h4>
+          <ol class="spaced-list">
+            <li>Clone the Repo: <a cbjRipple class="btn btn-secondary raised" href="https://github.com/gjordan904/cbj-ui" target="_blank"><span class="dev-icon github tiny"></span></a></li>
+            <li>Navigate to the root of the repo.</li>
+            <li>Run <pre class="install-code"><code [cbjHighlight]="buildCode" [innerHTML]="buildCode.code"></code></pre></li>
+            <li>Copy the newly created dist/ui directory into a location that will be resolved by webpack</li>
+            <li>You should now be able to use the package as outlined below</li>
+          </ol>
         </div>
       </div>
     </div>

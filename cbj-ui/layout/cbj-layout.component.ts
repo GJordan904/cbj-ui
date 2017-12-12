@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, HostListener, Inject, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {LayoutConfig, SidebarLink, SidebarLinkTypes} from '../models';
 import {fade} from '../animations';
-import {WINDOW} from '../services';
+import {WindowService} from '../services';
 import {Subject} from 'rxjs/Subject';
 
 const DEFAULT_CONFIG: LayoutConfig = {
@@ -31,14 +31,12 @@ const DEFAULT_CONFIG: LayoutConfig = {
 export class CbjLayoutComponent implements OnInit, AfterViewInit {
   @Input('config')config: LayoutConfig;
   sidebarOpen: boolean;
-  isMobile: boolean;
 
-  constructor(@Inject(WINDOW) private window: Window) {}
-
-  @HostListener('window:resize')
-  onResize() {
-    this.setMobile();
+  get isMobile() {
+    return this.window.isMobile;
   }
+
+  constructor(private window: WindowService) {}
 
   ngOnInit() {
     this.config = {
@@ -48,7 +46,6 @@ export class CbjLayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setMobile();
     for (const link of this.config.sidebarLinks) {
       if (link.type === SidebarLinkTypes.DROPDOWN) {
         link.dropdownHeight = link.children.length * 47.33;
@@ -63,13 +60,9 @@ export class CbjLayoutComponent implements OnInit, AfterViewInit {
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
     if (this.sidebarOpen) {
-      DEFAULT_CONFIG.sideScrollbarOptions.toggleClasses.next({el: 'wrapper', classes: 'open', remove: false});
+      this.config.sideScrollbarOptions.toggleClasses.next({el: 'wrapper', classes: 'open', remove: false});
     }else {
-      DEFAULT_CONFIG.sideScrollbarOptions.toggleClasses.next({el: 'wrapper', classes: 'open', remove: true});
+      this.config.sideScrollbarOptions.toggleClasses.next({el: 'wrapper', classes: 'open', remove: true});
     }
-  }
-
-  private setMobile() {
-    this.isMobile = this.window.innerWidth < 992;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DatatableOptions, CbjLinkCellComponent} from '@codebyjordan/ui';
+const api = 'https://jsonplaceholder.typicode.com';
 
 @Component({
   selector: 'app-datatable-demo',
@@ -127,6 +128,7 @@ export class LayoutDemoComponent implements OnInit {
     language: 'markup',
     code: `<cbj-datatable [config]="dtOptions"></cbj-datatable>`
   };
+  demoDtOptions: DatatableOptions;
   apiDtOptions: DatatableOptions;
   modelsDtOptions: DatatableOptions;
 
@@ -134,12 +136,36 @@ export class LayoutDemoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.demoDtOptions = {
+      multiData: true,
+      rowsPerPage: 5,
+      cardClasses: 'bg-secondary',
+      columns: [
+        [
+          { name: 'ID', data: 'id', flex: .5 },
+          { name: 'User ID', data: 'userId', flex: .5 },
+          { name: 'Title', data: 'title', flex: 1 },
+          { name: 'Body', data: 'body', flex: 2.5, breakpoint: 992 }
+        ],
+        [
+          { name: 'ID', data: 'id', flex: .25 },
+          { name: 'PostID', data: 'postId', flex: .25 },
+          { name: 'Name', data: 'name', flex: 1.5 },
+          { name: 'Email', data: 'email', flex: 1.5, breakpoint: 992 },
+          { name: 'Body', data: 'body', flex: 2.5, breakpoint: 992 }
+        ],
+      ],
+      data: [
+        {name: 'Posts', data: `${api}/posts`},
+        {name: 'Comments', data: `${api}/comments`}
+      ]
+    };
     this.apiDtOptions = {
       cardClasses: 'bg-secondary',
       columns: [
         { name: 'Attribute', data: 'name', flex: 1 },
         { name: 'Type', data: 'type', flex: 1 },
-        { name: 'Description', data: 'description', flex: 2 }
+        { name: 'Description', data: 'description', flex: 2, breakpoint: 992 }
       ],
       data: [
         {
@@ -156,7 +182,7 @@ export class LayoutDemoComponent implements OnInit {
       columns: [
         { name: 'Property', data: 'prop', flex: 1 },
         { name: 'Required', data: 'required', flex: .75 },
-        { name: 'Type', data: 'type', flex: 1 },
+        { name: 'Type', data: 'type', flex: 1, breakpoint: 992 },
         { name: 'Description', data: 'description', flex: 2.5, breakpoint: 992 }
       ],
       data: [

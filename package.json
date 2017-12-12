@@ -8,7 +8,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:app": "cp -R dist/ui docs/@codebyjordan/ui && ng build && rimraf docs/@codebyjordan",
-    "build:lib": "ng-packagr",
+    "build:lib": "ng-packagr && scss-bundle -c scss-bundle.config.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -50,6 +50,7 @@
     "ng-packagr": "^1.6.0",
     "protractor": "~5.1.2",
     "rimraf": "^2.6.1",
+    "scss-bundle": "^2.1.0",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": ">=2.4.2 <2.5.0"

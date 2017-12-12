@@ -7,6 +7,10 @@ export interface DatatableOptions {
   serverSide?: boolean;
   multiData?: boolean;
   rowsPerPage?: number;
+  searching?: boolean;
+  sorting?: boolean;
+  filtering?: boolean;
+  paging?: boolean;
 }
 
 export interface DatatableColumn {

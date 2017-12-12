@@ -12,7 +12,7 @@ export class CbjRippleDirective implements OnInit, AfterViewInit {
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   @HostListener('touchstart', ['$event'])
-  onTouchStart(e: TouchEvent) {
+  onTouchStart(e: Event) {
     this.rippleStart(e);
   }
 
@@ -75,7 +75,7 @@ export class CbjRippleDirective implements OnInit, AfterViewInit {
     this.renderer.appendChild(this.el.nativeElement, this.rippleContainer);
   }
 
-  private rippleStart(e: MouseEvent | TouchEvent) {
+  private rippleStart(e: MouseEvent | TouchEvent | any) {
     if (!this.animating) {
       this.animating = true;
       const size = this.config.size ? this.config.size : Math.max(this.el.nativeElement.offsetWidth, this.el.nativeElement.offsetHeight);

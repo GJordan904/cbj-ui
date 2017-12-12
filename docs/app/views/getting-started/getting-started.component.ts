@@ -8,6 +8,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class GettingStartedComponent implements OnInit {
   installCode = {language: 'bash', code: 'npm i --save @codebyjordan/ui'};
+  buildCode = {language: 'bash', code: 'npm run build:lib'};
   importAllCode = {language: 'typescript', code: `// app.module.ts
 import { CbjUiModule } from '@codebyjordan/ui';
 

@@ -3,13 +3,14 @@ import {
   Renderer2
 } from '@angular/core';
 import {ScrollBarOptions} from '../models';
-import {ScrollService} from '../services';
+import {ScrollService, WindowService} from '../services';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/filter';
 import {easing} from '../animations';
 import {Observable} from 'rxjs/Observable';
 import {NavigationStart, Router} from '@angular/router';
+
 
 const DEFAULT_SCROLLBAR: ScrollBarOptions = {
   isRoot: false,
@@ -49,6 +50,7 @@ export class CbjScrollbarDirective implements OnInit, AfterViewInit, AfterViewCh
   constructor(private el: ElementRef,
               private renderer: Renderer2,
               private scroll: ScrollService,
+              private window: WindowService,
               @Optional() private router: Router) { }
 
   ngOnInit() {
@@ -175,9 +177,9 @@ export class CbjScrollbarDirective implements OnInit, AfterViewInit, AfterViewCh
 
     this.scroll.initWheel(el)
       .takeUntil(this.unsubscribe)
-      .subscribe(this.scrollContent);
+      .subscribe(this.scrollWheel);
 
-    this.scroll.resizeObs.takeUntil(this.unsubscribe).subscribe(() => {
+    this.window.resizeObs.takeUntil(this.unsubscribe).subscribe(() => {
       this.setBarHeight();
       if (this.config.isRoot) {
         this.scroll.scrollHeight = el.offsetHeight;
@@ -277,24 +279,30 @@ export class CbjScrollbarDirective implements OnInit, AfterViewInit, AfterViewCh
     this.timeout = setTimeout(this.showHideBarGrid, this.config.visibleTimeout);
   }
 
-  private scrollContent = (event: {x: number, y: number, type: string}) => {
+  private dragStart = (top: number) => {
+    this.renderer.setStyle(this.bar, 'top', `${top}px`);
+    this.scrollContent();
+  }
+
+  private dragEnd = () => {
+    const el = this.el.nativeElement;
+    const paddingTop = parseInt(el.style.paddingTop, 10);
+    const paddingBottom = parseInt(el.style.paddingBottom, 10);
+
+    if (paddingTop > 0 || paddingBottom > 0) {
+      this.scrollTo(0, 300, 'inOutCubic');
+    }
+  }
+
+  private scrollContent = () => {
     const el = this.el.nativeElement;
     const maxTop = el.offsetHeight - this.bar.offsetHeight;
     let percentScroll: number;
-    let over = null;
-    let delta = event.y;
 
-    if (event.type === 'wheel') {
-      delta = parseInt(getComputedStyle(this.bar).top, 10) + event.y * 5 / 100 * this.bar.offsetHeight;
-
-      if (delta < 0 || delta > maxTop) {
-        over = delta > maxTop ? delta - maxTop : delta;
-      }
-
-      delta = Math.min(Math.max(delta, 0), maxTop);
-      delta = (event.y > 0) ? Math.ceil(delta) : Math.floor(delta);
-      this.renderer.setStyle(this.bar, 'top', delta + 'px');
-    }
+    let delta = parseInt(getComputedStyle(this.bar).top, 10);
+    delta = Math.min(Math.max(delta, 0), maxTop);
+    delta = Math.floor(delta);
+    this.renderer.setStyle(this.bar, 'top', delta + 'px');
 
     percentScroll = parseInt(getComputedStyle(this.bar).top, 10) / (el.offsetHeight - this.bar.offsetHeight);
     delta = percentScroll * (el.scrollHeight - el.offsetHeight);
@@ -305,33 +313,42 @@ export class CbjScrollbarDirective implements OnInit, AfterViewInit, AfterViewCh
       this.scroll.scrollPos = delta;
       this.scroll.scrollSubj.next(delta);
     }
-
-    return over;
   }
 
-  private dragStart = (top: number) => {
+  private scrollWheel = (event: {x: number, y: number, type: string}) => {
     const el = this.el.nativeElement;
-    this.renderer.setStyle(this.bar, 'top', `${top}px`);
-    const over = this.scrollContent({x: 0, y: 0, type: 'drag'});
+    const start = Date.now();
     const maxTop = el.offsetHeight - this.bar.offsetHeight;
+    let percentScroll: number;
+    let delta;
 
-    if (over && over < 0 && -over <= maxTop) {
-      this.renderer.setStyle(el, 'paddingTop', -over + 'px');
-    } else if (over && over > 0 && over <= maxTop) {
-      this.renderer.setStyle(el, 'paddingBottom', over + 'px');
-    }
-  }
+    const scroll = () => {
+      const currentTime = Date.now();
+      const time = Math.min(1, ((currentTime - start) / 200));
+      const easedTime = easing.inOutQuad(time);
 
-  private dragEnd = () => {
-    const el = this.el.nativeElement;
-    const paddingTop = parseInt(el.style.paddingTop, 10);
-    const paddingBottom = parseInt(el.style.paddingBottom, 10);
+      delta = parseInt(getComputedStyle(this.bar).top, 10) + event.y * easedTime;
 
-    if (paddingTop > 0) {
-      this.scrollTo(0, 300, 'inOutCubic');
-    } else if (paddingBottom > 0) {
-      this.scrollTo(0, 300, 'inOutCubic');
-    }
+      delta = Math.min(Math.max(delta, 0), maxTop);
+      delta = (event.y > 0) ? Math.ceil(delta) : Math.floor(delta);
+      this.renderer.setStyle(this.bar, 'top', delta + 'px');
+
+      percentScroll = parseInt(getComputedStyle(this.bar).top, 10) / (el.offsetHeight - this.bar.offsetHeight);
+      delta = percentScroll * (el.scrollHeight - el.offsetHeight);
+
+      el.scrollTop = delta;
+
+      if (this.config.isRoot) {
+        this.scroll.scrollPos = delta;
+        this.scroll.scrollSubj.next(delta);
+      }
+
+      if (time < 1) {
+        requestAnimationFrame(scroll);
+      }
+    };
+
+    requestAnimationFrame(scroll);
   }
 
   private scrollTo(y: number, duration: number, easingFunc: string): void {
@@ -343,7 +360,7 @@ export class CbjScrollbarDirective implements OnInit, AfterViewInit, AfterViewCh
     const paddingTop = parseInt(el.style.paddingTop, 10) || 0;
     const paddingBottom = parseInt(el.style.paddingBottom, 10) || 0;
 
-    const scroll = (timestamp: number) => {
+    const scroll = () => {
       const currentTime = Date.now();
       const time = Math.min(1, ((currentTime - start) / duration));
       const easedTime = easing[easingFunc](time);

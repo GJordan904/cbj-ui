@@ -1,22 +1,22 @@
 import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
-import {ScrollService} from '../services';
+import {ScrollService, WindowService} from '../services';
 import {ManageVisibility} from './manage-visibility.class';
 
 @Directive({
   selector: '[cbjInView]'
 })
-export class CbjInViewDirective extends ManageVisibility{
+export class CbjInViewDirective extends ManageVisibility {
   @Output('show') show = new EventEmitter<ElementRef>();
 
-  constructor(public el: ElementRef, public scroll: ScrollService) {
-    super(el, scroll);
+  constructor(public el: ElementRef, public scroll: ScrollService, public window: WindowService) {
+    super(el, scroll, window);
   }
 
   /**
    * check for visibility of element
    */
   manageVisibility(): void {
-    const winHeight = this.scroll.getWinHeight();
+    const winHeight = this.window.getWinHeight();
 
     const scrollTrigger = this.offsetTop + 150 - winHeight;
 

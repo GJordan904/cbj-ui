@@ -19,7 +19,7 @@
                     >
                         {{col.name}}
                         <ng-container *ngIf="col.sortable">
-                            <i *ngIf="col.sorted; else notSorted" class="material-icons md-1" [ngClass]="col.sortOrd === 'desc' ? 'down' : ''">arrow_upward</i>
+                            <i *ngIf="col.sorted; else notSorted" class="material-icons md-success md-1" [ngClass]="col.sortOrd === 'desc' ? 'down' : ''">arrow_upward</i>
                             <ng-template #notSorted>
                                 <i class="material-icons md-1"></i>
                             </ng-template>
@@ -52,19 +52,40 @@
             <ng-container *ngIf="colsHidden">
                 <div class="dtTable-row-cell">
                     <div class="toggler" (click)="row.cbjState = row.cbjState === 'closed' ? 'open' : 'closed'">
-                        <i class="material-icons tiny">add_box</i>
-                        More Columns
+                        <i class="material-icons tiny md-primary">add_box</i>
                     </div>
                 </div>
                 <div class="dtTable-row-hidden" [@collapse]="row.cbjState">
                     <ul class="cols-list">
                         <ng-container *ngFor="let col of columns">
-                            <li *ngIf="col.hidden && isString(col.data)" class="col"><span class="col-name">{{col.name}}:</span>{{row[col.data]}}</li>
+                            <li *ngIf="col.hidden && isString(col.data)" class="col"><span class="col-name">{{col.name}}: </span><span [innerHTML]="row[col.data]"></span></li>
                         </ng-container>
                     </ul>
                 </div>
             </ng-container>
         </div>
 
+
+        <div *ngIf="config.paging" class="card-footer">
+            <nav aria-label="Demo Table Navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
