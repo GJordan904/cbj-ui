@@ -1,12 +1,25 @@
 <cbj-layout [config]="layoutConfig">
 
-    <a navbar-brand class="d-inline-flex align-items-center ml-3" routerLink="/home">
+    <!-- Navbar -->
+    <a navbar-brand class="d-inline-flex align-items-center ml-3" routerLink="/cbj-ui">
         <img src="/assets/img/ui-sm.png" class="d-inline-block" alt="">
     </a>
 
+    <!-- Sidebar -->
     <img sidebar-header class="bg-primary" width="100%" height="auto"  src="/assets/img/ui-lg.png">
 
     <router-outlet main-content></router-outlet>
 
+    <!-- Footer -->
+    <div cbj-footer class="navbar-text">
+        CBJ Scrollbar
+    </div>
+    <div cbj-footer class="navbar-text d-none d-lg-block">
+        A Grant Jordan Creation
+    </div>
+    <a cbj-footer href="https://codebyjordan.com">
+        <img class="nav-logo" src="assets/img/cbj/cbj-logo-small-white.png">
+        Code by Jordan
+    </a>
 </cbj-layout>
 

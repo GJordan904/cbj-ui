@@ -1,0 +1,40 @@
+<div class="jumbotron jumbotron-fluid bg-primary text-white text-center">
+  <h1>Buttons</h1>
+  <cbj-button btnClasses="btn-primary">Flat</cbj-button>
+  <cbj-button [raised]="true" btnClasses="btn-secondary">Raised</cbj-button>
+</div>
+
+<div class="container-fluid">
+  <h2 class="d-inline-block">
+    CbJ Button
+    <hr>
+  </h2>
+  <p>
+    The <span class="code token tag">&lt;cbj-button>&lt;/cbj-button></span> provides a convenient way of adding
+    various styles of buttons to a page. Buttons are either <span class="code token tag">&lt;a></span> or
+    <span class="code token tag">&lt;button></span> tags, depending on the options passed. Buttons will be in all caps
+    by default as set by the sass variable <span class="code token variable">$btn-text-transform</span>.
+  </p>
+
+  <p>
+    Buttons are one of the components where I have completely overwritten the Bootstrap styles. I utilize a variation
+    of the button-variant mixin and do not import the bootstrap button scss file. So if you were to use the btn class
+    without the angular component, you would still get the same styles.
+  </p>
+  <h3 class="d-inline-block mt-4">
+    Usage
+    <hr>
+  </h3>
+  <br>
+
+  <cbj-button [rippleConf]="{color: '#000', opacity: .15, expandTime: .25}">different</cbj-button>
+  <cbj-button [raised]="true" btnClasses="btn-primary">styles</cbj-button>
+  <cbj-button btnClasses="btn-secondary">and</cbj-button>
+  <cbj-button [raised]="true" btnClasses="btn-info">colors</cbj-button>
+  <cbj-button btnClasses="btn-warning">of</cbj-button>
+  <cbj-button link="/cbj-ui" text="buttons" btnClasses="btn-danger">buttons</cbj-button>
+
+  <pre>
+    <code [cbjHighlight]="usageCode"></code>
+  </pre>
+</div>

@@ -1,16 +1,6 @@
-/**
- * Jumbotron
- */
+//
+// Jumbotron
+//
 .jumbotron {
-  @include elevation-1;
-  margin-bottom: 1.5rem;
-
-  h1 {
-    font-size: 4rem;
-
-    .sub {
-      display: block;
-      font-size: 1.5rem
-    }
-  }
+  @include cbj-elevation(1);
 }

@@ -12,21 +12,25 @@
     top: 0;
     left: 0;
     padding: 0;
-    background: #fff;
     transition: all 350ms ease-in-out;
     overflow: hidden;
-    @include elevation-3;
+    z-index: 1000;
+    background: $body-bg;
+    @include cbj-elevation(5);
+  }
 
-    .cbj-menu-item {
-      display: block;
-      width: 100%;
-      background: transparent;
-      border: none;
-      padding: .75rem .5rem;
 
-      &.active {
-        background-color: rgba($black, 0.25);
-      }
+  .cbj-menu-item, button, a {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  .active {
+    .cbj-menu-item, button, a {
+      background: rgba($body-bg, .25) !important;
+      color: color-yiq(rgba($body-bg, .25)) !important;
     }
   }
 }

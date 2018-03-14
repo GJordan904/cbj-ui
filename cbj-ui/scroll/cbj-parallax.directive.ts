@@ -1,7 +1,7 @@
 import {Directive, ElementRef, Input} from '@angular/core';
-import {ScrollService, WindowService} from '../services';
+import {ScrollbarService, WindowService} from '../@codebyjordan/scrollbar';
 import {ManageVisibility} from './manage-visibility.class';
-import {ParallaxConfig} from '../models';
+import {ParallaxConfig} from './cbj-scroll.models';
 
 @Directive({
   selector: '[cbjParallax]'
@@ -9,7 +9,7 @@ import {ParallaxConfig} from '../models';
 export class CbjParallaxDirective extends ManageVisibility {
   @Input('cbjParallax')config: ParallaxConfig;
 
-  constructor(public el: ElementRef, public scroll: ScrollService, public window: WindowService) {
+  constructor(public el: ElementRef, public scroll: ScrollbarService, public window: WindowService) {
     super(el, scroll, window);
   }
 
@@ -32,7 +32,7 @@ export class CbjParallaxDirective extends ManageVisibility {
    * check for visibility of element
    */
   manageVisibility(): void {
-    const winHeight = this.window.getWinHeight();
+    const winHeight = this.window.height;
 
     const scrollTrigger = this.offsetTop - winHeight;
 
@@ -41,7 +41,7 @@ export class CbjParallaxDirective extends ManageVisibility {
 
     }
 
-    if(this.eivVisible) {
+    if (this.eivVisible) {
       let resultVal: string;
       let calcVal: number;
 

@@ -1,72 +1,86 @@
-<div class="site-wrapper">
-    <div class="row m-0">
-        <nav class="navbar" [ngClass]="config.navbarClasses">
-            <div class="navbar-brand">
-                <div *ngIf="config.useSidebar"
-                     class="menu-toggler"
-                     [ngClass]="{open: sidebarOpen}"
-                     (click)="toggleSidebar()">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </div>
-                <ng-content select="[navbar-brand]"></ng-content>
-            </div>
-            <ng-content select="[navbar-content]"></ng-content>
-        </nav>
-    </div>
+<!-- Top Navbar -->
+<div class="row m-0">
+    <nav class="navbar" [ngClass]="config.navbarClasses">
+        <div class="navbar-brand">
+            <ng-container *ngIf="config.useSidebar">
+                <i class="material-icons md-3 clickable"
+                   (click)="toggleSidebar()"
+                   cbjRipple
+                >menu</i>
+            </ng-container>
+            <ng-content select="[navbar-brand]"></ng-content>
+        </div>
 
-    <div class="site-inner">
+        <ng-content select="[navbar-content]"></ng-content>
+    </nav>
+</div>
 
-        <nav *ngIf="config.useSidebar"
-             class="cbj-sidebar"
+<!-- Site Inner -->
+<div [class]="config.footerType === 2 ? 'cbj-site-inner-sticky' : 'cbj-site-inner'">
+
+    <!-- Sidebar -->
+    <ng-container *ngIf="config.useSidebar">
+        <nav class="cbj-sidebar"
              [ngClass]="{open: sidebarOpen}"
-             [cbjScrollbar]="config.sideScrollbarOptions">
+             [cbjScrollbar]="config.sideScrollConfig">
 
             <ng-content select="[sidebar-header]"></ng-content>
 
+            <!-- The sidebars links -->
             <div class="list-group">
                 <ng-container *ngFor="let link of config.sidebarLinks">
                     <ng-container [ngSwitch]="link.type">
 
-                        <h4 *ngSwitchCase="0"
-                            [class]="config.linkClasses.heading"
-                            [ngClass]=""
-                            [cbjRipple]="{size: 317}"
-                        >
-                            {{link.text}}
-                        </h4>
+                        <!-- Header Link -->
+                        <div [class]="config.headingClass" *ngSwitchCase="0">
+                            <div class="d-flex align-items-center">
+                                <i *ngIf="link.icon" class="material-icons">{{link.icon}}</i>
+                                <h4>{{link.text}}</h4>
+                            </div>
+                        </div>
 
-                        <ng-container *ngSwitchCase="1">
-                            <div class="dropdown-link" (click)="toggleDropdown(link)" [ngClass]="{show: link.dropdownShow}">
-                                <div [class]="config.linkClasses.dropdown" [cbjRipple]="{size: 317}">
+                        <!-- Dropdown Link -->
+                        <div *ngSwitchCase="1">
+                            <div [class]="config.dropdownClass"
+                                 [cbjRipple]="{size: 317}"
+                                 (click)="toggleDropdown(link)"
+                                 [ngClass]="{show: link.dropdownShow}"
+                            >
+                                <div class="d-flex align-items-center">
+                                    <i *ngIf="link.icon" class="material-icons">{{link.icon}}</i>
                                     {{link.text}}
-                                    <i class="material-icons md-2">keyboard_arrow_right</i>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="material-icons rotate">keyboard_arrow_right</i>
                                 </div>
                             </div>
                             <div class="collapse" [ngStyle]="{'height.px': link.dropdownShow ? link.dropdownHeight : 0}">
                                 <ng-container *ngFor="let subLink of link.children">
-                                    <a [class]="config.linkClasses.link"
+                                    <a [class]="config.linkClass"
                                        [routerLink]="subLink.link"
-                                       [routerLinkActive]="config.linkClasses.active"
+                                       [routerLinkActive]="config.activeClass"
                                        [cbjRipple]="{size: 317}"
-                                       (click)="sidebarOpen = false"
+                                       (click)="linkClick()"
                                     >
                                         {{subLink.text}}
                                     </a>
                                 </ng-container>
                             </div>
-                        </ng-container>
+                        </div>
 
-                        <a *ngSwitchCase="2"
-                           [class]="config.linkClasses.link"
-                           [routerLink]="link.link"
-                           [routerLinkActive]="config.linkClasses.active"
-                           [cbjRipple]="{size: 317}"
-                           (click)="sidebarOpen = false"
-                        >
-                            {{link.text}}
-                        </a>
+                        <!-- Regular Link -->
+                        <div *ngSwitchCase="2">
+                            <a [routerLink]="link.link"
+                               [routerLinkActive]="config.activeClass"
+                               [class]="config.linkClass"
+                               [cbjRipple]="{size: 317}"
+                               (click)="linkClick()"
+                            >
+                                <i *ngIf="link.icon" class="material-icons">{{link.icon}}</i>
+                                {{link.text}}
+                            </a>
+                            <div></div>
+                        </div>
 
                     </ng-container>
                 </ng-container>
@@ -75,18 +89,33 @@
             <ng-content select="[sidebar-footer]"></ng-content>
 
         </nav>
+    </ng-container>
 
-        <div class="backdrop"
-             *ngIf="sidebarOpen && isMobile"
-             (click)="sidebarOpen = false"
-             [@fade]>
-        </div>
-
-        <div class="main-content" [ngClass]="{open: sidebarOpen}" [cbjScrollbar]="config.mainScrollbarOptions">
-
-            <ng-content select="[main-content]"></ng-content>
-
-        </div>
-
+    <!-- Backdrop -->
+    <div *ngIf="sidebarOpen && isMobile"
+         class="cbj-backdrop"
+         (click)="toggleSidebar()"
+         [@fade]>
     </div>
+
+    <!-- Main Content -->
+    <div class="cbj-main-content" [ngClass]="{open: sidebarOpen}" [cbjScrollbar]="config.mainScrollConfig">
+
+        <ng-content select="[main-content]"></ng-content>
+
+        <!-- Bottom Footer -->
+        <ng-container *ngIf="config.footerType === 1">
+            <nav class="navbar cbj-footer" [ngClass]="config.footerClasses">
+                <ng-content select="[cbj-footer]"></ng-content>
+            </nav>
+        </ng-container>
+    </div>
+
 </div>
+
+<!-- Sticky Footer -->
+<ng-container *ngIf="config.footerType === 2">
+    <nav class="navbar cbj-footer-sticky" >
+        <ng-content select="[cbj-footer-sticky]"></ng-content>
+    </nav>
+</ng-container>

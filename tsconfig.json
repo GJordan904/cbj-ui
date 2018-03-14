@@ -15,10 +15,7 @@
     "lib": [
       "es2016",
       "dom"
-    ],
-    "paths": {
-      "@cbj/ui": [ "dist/cbj-ui" ]
-    }
+    ]
   },
   "exclude": [
     ".ng_build"

@@ -1,5 +1,5 @@
-import {AfterContentInit, ComponentFactoryResolver, Directive, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {ComponentCellOptions} from '../models';
+import {ComponentFactoryResolver, Directive, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {ComponentCellOptions} from './cbj-datatable.models';
 
 @Directive({
   selector: '[cbjCompCell]'

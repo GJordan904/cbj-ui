@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {CbjDatatableComponent} from './cbj-datatable.component';
+import { NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CbjMenuModule} from '../menu';
 import {RouterModule} from '@angular/router';
+import {CbjDatatableComponent} from './cbj-datatable.component';
+import {CbjMenuModule} from '../menu';
 import {CbjCompCellDirective} from './cbj-component-cell.directive';
 import {CbjLinkCellComponent} from './cbj-link-cell.component';
 

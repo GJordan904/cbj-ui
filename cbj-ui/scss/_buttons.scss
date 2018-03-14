@@ -1,51 +1,47 @@
-/**
-  * Buttons
- */
-
+//
+// Buttons
+//
+.clickable {
+  @include clickable;
+}
 .btn {
+  height: $cbjn-btn-height;
+  min-width: $cbjn-btn-min-width;
+  margin: .5rem;
   align-items: center;
+  justify-content: center;
   display: inline-flex;
-  background: transparent;
-  color: $flat-btn-color;
-  border-radius: $cbj-btn-border-radius;
   text-transform: $btn-text-transform;
+  font-family: $font-family-base;
+  @include clickable;
+  @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-line-height, $cbj-btn-border-radius);
+  border: none;
+  @include cbj-elevation-transition();
 
   .material-icons {
     margin: 0 .25rem;
   }
 
-  &:active, &:focus {
-    background-color: $flat-btn-active-bg;
-    color: $flat-btn-active-color;
+  &-flat {
+    @include cbj-button-variant(transparent, rgba($body-bg, .75), rgba($body-bg,.85), false, true);
+  }
+
+  &-raised {
+    @include cbj-button-variant(transparent, darken($body-bg, 2%), darken($body-bg, 3%), true, true);
   }
 
   @each $color, $value in $theme-colors {
     &.btn-#{$color} {
-      background: transparent;
-      color: $value;
-
-      &:active, &:focus {
-        background-color: $value;
-        color: $flat-variant-active-color;
+      &.btn-flat {
+        @include cbj-button-variant($value);
+      }
+      &.btn-raised {
+        @include cbj-button-variant($value, darken($value, 15%), darken($value, 30%), true);
       }
     }
   }
+}
 
-  &.raised {
-    @include elevation-action;
-    background-color: $raised-btn-bg;
-    color: $raised-btn-color;
-
-    @each $color, $value in $theme-colors {
-      &.btn-#{$color} {
-        background-color: $value;
-        color: $raised-variant-color;
-      }
-    }
-
-    &:active {
-      border: none;
-      outline: none;
-    }
-  }
+button {
+  @extend .btn
 }

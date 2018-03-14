@@ -1,11 +1,12 @@
 import {AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Renderer2} from '@angular/core';
+import { RippleConfig } from './ripple.models';
 
 @Directive({
   selector: '[cbjRipple]'
 })
 export class CbjRippleDirective implements OnInit, AfterViewInit {
-  @Input('cbjRipple')options: any;
-  config: any;
+  @Input('cbjRipple')cbjRipple: RippleConfig;
+  config: RippleConfig;
   rippleContainer: HTMLElement;
   animating: boolean;
 
@@ -18,7 +19,6 @@ export class CbjRippleDirective implements OnInit, AfterViewInit {
 
   @HostListener('click', ['$event'])
   onMouseDown(e: MouseEvent) {
-    console.log('clicked ripple');
     this.rippleStart(e);
   }
 
@@ -33,18 +33,17 @@ export class CbjRippleDirective implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    const defaults = {
+    const defaults: RippleConfig = {
       cxlOnMove: true,
       color: 'white',
       opacity: 0.25,
       shadow: 'none',
       expandTime: .25,
-      collapseTime: .4,
-      size: 0
+      size: null
     };
     this.config = {
       ...defaults,
-      ...this.options,
+      ...this.cbjRipple,
     };
     this.animating = false;
   }
@@ -64,7 +63,7 @@ export class CbjRippleDirective implements OnInit, AfterViewInit {
     const size = this.config.size ? this.config.size : Math.max(this.el.nativeElement.offsetHeight, this.el.nativeElement.offsetWidth);
 
     this.rippleContainer = this.renderer.createElement('div');
-    this.renderer.setStyle(this.rippleContainer, 'transition', `transform ${this.config.expandTime}s ease-in-out`);
+    this.renderer.setStyle(this.rippleContainer, 'transition', `transform ${this.config.expandTime}s cubic-bezier(.17,.67,.83,.67)`);
     this.renderer.setStyle(this.rippleContainer, 'height', `${size}px`);
     this.renderer.setStyle(this.rippleContainer, 'width', `${size}px`);
     this.renderer.setStyle(this.rippleContainer, 'display', 'block');

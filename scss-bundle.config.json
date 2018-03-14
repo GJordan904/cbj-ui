@@ -1,4 +1,0 @@
-{
-  "entry": "./cbj-ui/scss/cbj-ui.scss",
-  "dest": "./dist/ui/scss/cbj-ui.scss"
-}

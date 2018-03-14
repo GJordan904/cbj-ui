@@ -1,0 +1,5 @@
+{
+  "entry": "./ui/scss/cbj-ui.variables.scss",
+  "dest": "./dist/ui/scss/cbj-ui.variables.scss",
+  "includePaths": ["./node_modules"]
+}

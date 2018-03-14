@@ -1,0 +1,15 @@
+<ng-container *ngIf="link; else elseBlock">
+  <a [cbjRipple]="rippleConf"
+     [routerLink]="link"
+     [ngClass]="classes()">
+    {{text}}
+  </a>
+</ng-container>
+<ng-template #elseBlock>
+  <button [cbjRipple]="rippleConf"
+          [ngClass]="classes()">
+
+    <ng-content></ng-content>
+
+  </button>
+</ng-template>

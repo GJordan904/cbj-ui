@@ -1,5 +1,5 @@
 import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
-import {ScrollService, WindowService} from '../services';
+import {ScrollbarService, WindowService} from '../@codebyjordan/scrollbar';
 import {ManageVisibility} from './manage-visibility.class';
 
 @Directive({
@@ -8,7 +8,7 @@ import {ManageVisibility} from './manage-visibility.class';
 export class CbjInViewDirective extends ManageVisibility {
   @Output('show') show = new EventEmitter<ElementRef>();
 
-  constructor(public el: ElementRef, public scroll: ScrollService, public window: WindowService) {
+  constructor(public el: ElementRef, public scroll: ScrollbarService, public window: WindowService) {
     super(el, scroll, window);
   }
 
@@ -16,7 +16,7 @@ export class CbjInViewDirective extends ManageVisibility {
    * check for visibility of element
    */
   manageVisibility(): void {
-    const winHeight = this.window.getWinHeight();
+    const winHeight = this.window.height;
 
     const scrollTrigger = this.offsetTop + 150 - winHeight;
 

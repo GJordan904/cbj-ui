@@ -1,0 +1,6 @@
+hr {
+  border: none;
+  height: $hr-border-width;
+  background: radial-gradient($hr-border-color, transparent);
+  margin: .75rem 0;
+}

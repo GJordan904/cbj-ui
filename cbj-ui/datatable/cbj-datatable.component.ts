@@ -1,7 +1,8 @@
-import {Component, HostListener, Inject, Input, OnDestroy, OnInit} from '@angular/core';
-import {DatatableColumn, DatatableMultiData, DatatableOptions, MenuItem} from '../models';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {DatatableColumn, DatatableMultiData, DatatableOptions} from './cbj-datatable.models';
+import {MenuItem} from '../menu';
 import {HttpClient} from '@angular/common/http';
-import {ScrollService, WINDOW, WindowService} from '../services';
+import {ScrollbarService, WindowService} from '../@codebyjordan/scrollbar';
 import {collapse} from '../animations';
 import {Subject} from 'rxjs/Subject';
 
@@ -42,8 +43,8 @@ export class CbjDatatableComponent implements OnInit, OnDestroy {
   private unsubscribe: Subject<void> = new Subject();
 
   constructor(private http: HttpClient,
-              private scroll: ScrollService,
-              private window: WindowService) { }
+              private scroll: ScrollbarService,
+              private ws: WindowService) { }
 
   ngOnInit() {
     this.config = {
@@ -53,7 +54,7 @@ export class CbjDatatableComponent implements OnInit, OnDestroy {
     this.initCols();
     this.initRows();
     this.measure();
-    this.window.resizeObs.takeUntil(this.unsubscribe).subscribe(this.measure);
+    this.ws.resizeObs.takeUntil(this.unsubscribe).subscribe(this.measure);
   }
 
   ngOnDestroy() {
@@ -62,7 +63,7 @@ export class CbjDatatableComponent implements OnInit, OnDestroy {
   }
 
   private measure = () => {
-    this.wWidth = this.window.innerWidth;
+    this.wWidth = this.ws.width;
     this.colsHidden = false;
     for (const col of this.columns) {
       if (col.breakpoint) {
@@ -145,7 +146,6 @@ export class CbjDatatableComponent implements OnInit, OnDestroy {
 
   private setAjaxRows(url: string, pageNum: number) {
     this.http.get(url).subscribe((resp: any) => {
-      console.log(resp);
       this.rows = resp;
       this.setPaging(pageNum);
       this.initVisibleRows();
@@ -185,7 +185,7 @@ export class CbjDatatableComponent implements OnInit, OnDestroy {
       this.columns = this.multiColumns[item.id];
     }
     if (typeof this.config.data[item.id].data === 'string')  {
-      this.setAjaxRows(this.config.data[item.id].data, item.id);
+      this.setAjaxRows(this.config.data[item.id].data, 0);
     } else {
       this.rows = this.config.data[item.id].data;
       this.setPaging(item.id);

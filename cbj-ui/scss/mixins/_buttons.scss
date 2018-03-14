@@ -1,0 +1,41 @@
+@mixin clickable {
+  cursor: pointer;
+}
+
+@mixin cbj-button-variant($background, $hover-background: rgba($background, .75), $active-background: rgba($background,.85), $raised: false, $transparent: false) {
+  @if $transparent {
+    color: color-yiq($body-bg);
+  }
+  @else {
+    color: color-yiq($background);
+  }
+  background-color: $background;
+  @if $raised {
+    @include cbj-elevation(7);
+  }
+
+  @include hover {
+    color: color-yiq($hover-background);
+    background-color: $hover-background;
+    text-decoration: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: color-yiq($background);
+    background-color: $background;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    &:focus {
+      border: none;
+      outline: 0;
+      @include cbj-elevation(23, $black);
+    }
+  }
+}

@@ -1,5 +1,4 @@
-code,
-pre {
+.code, code, pre {
   color: #a9b7c6;
   font-family: Consolas, Monaco, 'Andale Mono', monospace;
   direction: ltr;
@@ -25,8 +24,13 @@ pre {
   overflow: auto;
 }
 
-:not(pre) > code,
-pre {
+.code {
+  font-size: .65rem;
+  padding: .125rem;
+  border-radius: .15rem;
+}
+
+:not(pre) > code, pre, .code {
   background: #2b2b2b;
 }
 

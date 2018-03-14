@@ -1,24 +1,21 @@
 .cbj-elevation-1 {
-  @include elevation-1;
+  @include cbj-elevation(1);
 }
 .cbj-elevation-2 {
-  @include elevation-2;
+  @include cbj-elevation(3);
 }
 .cbj-elevation-3 {
-  @include elevation-3;
+  @include cbj-elevation(5);
 }
 .cbj-elevation-4 {
-  @include elevation-4;
-}
-.cbj-elevation-5 {
-  @include elevation-5;
+  @include cbj-elevation(7);
 }
 .cbj-elevation-action {
-  @include elevation-action;
+  @include cbj-elevation-action();
 }
 .cbj-elevation-left-sidebar {
-  @include elevation-left-sidebar
+  @include cbj-elevation-left-sidebar()
 }
 .cbj-elevation-right-sidebar {
-  @include elevation-right-sidebar
+  @include cbj-elevation-right-sidebar()
 }
