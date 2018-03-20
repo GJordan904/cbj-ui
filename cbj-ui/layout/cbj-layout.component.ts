@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import { LayoutConfig } from './layout-config.class';
 import { SidebarLink, SidebarLinkTypes } from './cbj-layout.models';
-import { fade } from '../animations';
-import { WindowService } from '../@codebyjordan/scrollbar';
+import { fade } from '../animations/index';
+import { WindowService } from '../scroll/index';
 
 @Component({
   selector: 'cbj-layout',

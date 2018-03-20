@@ -1,6 +1,7 @@
-import { FooterTypes, LayoutOptions } from './cbj-layout.models';
+import { FooterTypes, LayoutOptions, SidebarLink } from './cbj-layout.models';
 import { Subject } from 'rxjs/Subject';
-import {ScrollbarConfig} from '../@codebyjordan/scrollbar';
+import {ScrollbarConfig, ScrollbarOptions} from '../scroll/index';
+import { RippleConfig } from '../ripple/index';
 
 /**
  * @class LayoutConfig
@@ -106,6 +107,14 @@ export class LayoutConfig {
    */
   get useSidebar() {
     return this.options.useSidebar;
+  }
+
+  /**
+   *
+   * @returns {RippleConfig | undefined}
+   */
+  get rippleConf() {
+    return this.options.rippleConf;
   }
 
   /**
@@ -240,6 +249,7 @@ export class LayoutConfig {
 const DEFAULT_CONFIG: LayoutOptions = {
   footerType: FooterTypes.BOTTOM,
   useSidebar: false,
+  rippleConf: {opacity: .2, color: '#000', expandTime: .18},
   closeOnClick: false,
   navbarClasses: 'navbar-dark bg-primary',
   linkClasses: {
@@ -249,6 +259,7 @@ const DEFAULT_CONFIG: LayoutOptions = {
     link: 'cbj-link'
   },
   sideScrollbarOptions: {
+    wrapperWidth: false,
     classes: {
       wrapper: ['sidebar-scroll-wrapper']
     }

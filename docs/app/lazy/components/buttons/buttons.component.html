@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid bg-primary text-white text-center">
   <h1>Buttons</h1>
-  <cbj-button btnClasses="btn-primary">Flat</cbj-button>
-  <cbj-button [raised]="true" btnClasses="btn-secondary">Raised</cbj-button>
+  <cbj-button [btnClasses]="['btn-primary']">Flat</cbj-button>
+  <cbj-button [raised]="true" [btnClasses]="['btn-secondary']">Raised</cbj-button>
 </div>
 
 <div class="container-fluid">
@@ -28,11 +28,11 @@
   <br>
 
   <cbj-button [rippleConf]="{color: '#000', opacity: .15, expandTime: .25}">different</cbj-button>
-  <cbj-button [raised]="true" btnClasses="btn-primary">styles</cbj-button>
-  <cbj-button btnClasses="btn-secondary">and</cbj-button>
-  <cbj-button [raised]="true" btnClasses="btn-info">colors</cbj-button>
-  <cbj-button btnClasses="btn-warning">of</cbj-button>
-  <cbj-button link="/cbj-ui" text="buttons" btnClasses="btn-danger">buttons</cbj-button>
+  <cbj-button [raised]="true" [btnClasses]="['btn-primary']">styles</cbj-button>
+  <cbj-button [btnClasses]="['btn-secondary']">and</cbj-button>
+  <cbj-button [raised]="true" [btnClasses]="['btn-info']">colors</cbj-button>
+  <cbj-button [btnClasses]="['btn-warning']">of</cbj-button>
+  <cbj-button link="/cbj-ui" text="buttons" [btnClasses]="['btn-danger']">buttons</cbj-button>
 
   <pre>
     <code [cbjHighlight]="usageCode"></code>

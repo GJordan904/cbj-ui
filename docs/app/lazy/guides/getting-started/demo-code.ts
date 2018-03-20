@@ -48,7 +48,6 @@ const styles = {
   language: 'scss',
   code: `// styles.scss
 @import './your/custom/variables';
-@import '~bootstrap/scss/bootstrap';
 @import '~@codebyjordan/ui/scss/cbj-ui';
 ...`
 };

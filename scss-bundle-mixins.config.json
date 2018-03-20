@@ -1,0 +1,5 @@
+{
+  "entry": "./cbj-ui/scss/cbj-ui.mixins.scss",
+  "dest": "./dist/ui/scss/cbj-ui.mixins.scss",
+  "includePaths": ["./node_modules"]
+}

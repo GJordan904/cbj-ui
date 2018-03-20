@@ -6,3 +6,4 @@ export interface RippleConfig {
   expandTime?: number;
   size?: number;
 }
+

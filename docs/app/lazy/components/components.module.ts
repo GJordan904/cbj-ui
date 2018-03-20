@@ -13,6 +13,7 @@ import { ScrollbarComponent } from './scrolling/scrollbar/scrollbar.component';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { CbjCommonModule } from '../../common/cbj-common.module';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
     ParallaxComponent,
     ScrollbarComponent,
     ButtonsComponent,
+    GalleryComponent,
   ]
 })
 export class ComponentsModule { }

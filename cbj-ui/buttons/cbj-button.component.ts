@@ -1,5 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { RippleConfig } from '../ripple';
+import { Component, Input } from '@angular/core';
+import { RippleConfig } from '../ripple/index';
 
 @Component({
   selector: 'cbj-button',
@@ -9,7 +9,7 @@ export class CbjButtonComponent {
   @Input('link')link: string;
   @Input('raised')raised: boolean;
   @Input('text')text: string;
-  @Input('btnClasses')btnClasses: string[];
+  @Input('btnClasses')btnClasses: string[] = [];
   @Input('rippleConf')rippleConf: RippleConfig;
 
   classes() {

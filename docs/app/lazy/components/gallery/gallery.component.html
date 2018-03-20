@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <input type="url" [(ngModel)]="addUrl">
+      <cbj-button (click)="addItem()">Add Items</cbj-button>
+    </div>
+  </div>
+  <cbj-gallery [colWidth]="125" [images]="placeholders" width="500px" height="500px"></cbj-gallery>
+
+  <div class="container">
+    <cbj-filter-gallery [colWidth]="125" url="https://api.codebyjordan.com/front/projects" width="75%" height="500px">
+    </cbj-filter-gallery>
+  </div>
+</div>

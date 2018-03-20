@@ -20,19 +20,25 @@ export const LAYOUT_CONFIG: LayoutOptions = {
   },
   sidebarLinks: [
     { text: 'CBJ UI', link: '/cbj-ui', type: SidebarLinkTypes.LINK, icon: 'home' },
+    { text: 'Project Status', link: '/status', type: SidebarLinkTypes.LINK, icon: 'code' },
 
     { text: 'Components', icon: 'web', type: SidebarLinkTypes.HEADING },
-    { link: '/components/buttons', text: 'Buttons', type: SidebarLinkTypes.LINK},
     { text: 'Datatable', type: SidebarLinkTypes.DROPDOWN, dropdownShow: false, children: [
-        { link: '/components/datatable/table', text: 'Table', type: SidebarLinkTypes.LINK},
-        { link: '/components/datatable/link-cell', text: 'Link Cell', type: SidebarLinkTypes.LINK},
-        { link: '/components/datatable/bytes-transform', text: 'Bytes Transform', type: SidebarLinkTypes.LINK},
+        { link: '/components/datatable/table', text: 'Table', type: SidebarLinkTypes.LINK },
+        { link: '/components/datatable/link-cell', text: 'Link Cell', type: SidebarLinkTypes.LINK },
+        { link: '/components/datatable/bytes-transform', text: 'Bytes Transform', type: SidebarLinkTypes.LINK },
+      ]
+    },
+    {
+      text: 'Gallery', type: SidebarLinkTypes.DROPDOWN, dropdownShow: false, children: [
+        { link: '/components/gallery', text: 'Gallery', type: SidebarLinkTypes.LINK }
       ]
     },
     { text: 'Layout', type: SidebarLinkTypes.DROPDOWN, dropdownShow: false, children: [
+        { link: '/components/layout/buttons', text: 'Buttons', type: SidebarLinkTypes.LINK},
+        { link: '/components/layout/card-tabs', text: 'Card Tabs', type: SidebarLinkTypes.LINK},
         { link: '/components/layout/layout', text: 'Layout', type: SidebarLinkTypes.LINK},
         { link: '/components/layout/menu', text: 'Menu', type: SidebarLinkTypes.LINK},
-        { link: '/components/layout/card-tabs', text: 'Card Tabs', type: SidebarLinkTypes.LINK},
       ]
     },
     { text: 'Scrolling', type: SidebarLinkTypes.DROPDOWN, dropdownShow: false, children: [

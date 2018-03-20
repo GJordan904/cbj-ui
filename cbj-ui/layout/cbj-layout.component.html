@@ -42,7 +42,7 @@
                         <!-- Dropdown Link -->
                         <div *ngSwitchCase="1">
                             <div [class]="config.dropdownClass"
-                                 [cbjRipple]="{size: 317}"
+                                 [cbjRipple]="config.rippleConf"
                                  (click)="toggleDropdown(link)"
                                  [ngClass]="{show: link.dropdownShow}"
                             >
@@ -59,7 +59,7 @@
                                     <a [class]="config.linkClass"
                                        [routerLink]="subLink.link"
                                        [routerLinkActive]="config.activeClass"
-                                       [cbjRipple]="{size: 317}"
+                                       [cbjRipple]="config.rippleConf"
                                        (click)="linkClick()"
                                     >
                                         {{subLink.text}}
@@ -73,7 +73,7 @@
                             <a [routerLink]="link.link"
                                [routerLinkActive]="config.activeClass"
                                [class]="config.linkClass"
-                               [cbjRipple]="{size: 317}"
+                               [cbjRipple]="config.rippleConf"
                                (click)="linkClick()"
                             >
                                 <i *ngIf="link.icon" class="material-icons">{{link.icon}}</i>
@@ -92,7 +92,7 @@
     </ng-container>
 
     <!-- Backdrop -->
-    <div *ngIf="sidebarOpen && isMobile"
+    <div *ngIf="sidebarOpen"
          class="cbj-backdrop"
          (click)="toggleSidebar()"
          [@fade]>

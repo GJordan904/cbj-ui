@@ -12,11 +12,10 @@ import { ParallaxComponent } from './scrolling/parallax/parallax.component';
 import { ScrollbarComponent } from './scrolling/scrollbar/scrollbar.component';
 import { ComponentsComponent } from './components.component';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 const routes: Routes = [
   { path: '', component: ComponentsComponent },
-  {
-    path: 'buttons', component: ButtonsComponent },
   {
     path: 'datatable', children: [
       { path: 'bytes-transform', component: BytesTransformComponent },
@@ -25,7 +24,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'gallery', children: [
+      { path: '', component: GalleryComponent }
+    ]
+  },
+  {
     path: 'layout', children: [
+      {path: 'buttons', component: ButtonsComponent },
       { path: 'card-tabs', component: CardTabsComponent },
       { path: 'layout', component: LayoutComponent },
       { path: 'menu', component: MenuComponent },

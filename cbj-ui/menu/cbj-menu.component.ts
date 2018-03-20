@@ -1,6 +1,6 @@
 import {AfterContentInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {MenuItem} from './cbj-menu.models';
-import {collapse} from '../animations';
+import {collapse} from '../animations/index';
 
 @Component({
   selector: 'cbj-menu',
@@ -17,7 +17,7 @@ export class CbjMenuComponent implements AfterContentInit {
     activeClass: 'active'
   };
   @Input('items') items: MenuItem[];
-  @Input('btnClasses')btnClasses: string[];
+  @Input('btnClasses')btnClasses: string[] = [];
   toggleTitle: string;
   menuState = 'closed';
 
@@ -35,7 +35,7 @@ export class CbjMenuComponent implements AfterContentInit {
     return [ ...this.btnClasses, 'cbj-menu-item' ];
   }
 
-  toggleMenu(e: FocusEvent) {
+  toggleMenu(e?: FocusEvent) {
     if (e) {
       if (e.relatedTarget) {
         const target = <HTMLElement>e.relatedTarget;
@@ -50,7 +50,7 @@ export class CbjMenuComponent implements AfterContentInit {
     }
   }
 
-  itemClick(item: MenuItem) {
+  itemClick(item?: MenuItem) {
     this.clearActive(false);
     item.active = true;
     this.toggleTitle = item.title;

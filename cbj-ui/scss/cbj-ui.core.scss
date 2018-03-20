@@ -1,12 +1,4 @@
-@import 'mixins';
-@import "type";
-@import 'animations';
-@import 'buttons';
-@import 'material-icons';
-@import 'layout';
-@import 'cards';
-@import 'navs';
-@import "datatable";
-@import 'jumbotron';
-@import "menu";
-@import 'shadows';
+@import 'cbj-ui.variables';
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/list-group";
+@import 'core';

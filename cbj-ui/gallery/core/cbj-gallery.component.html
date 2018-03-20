@@ -1,0 +1,3 @@
+<div #wrapper class="position-relative" [style.height]="height" [style.width]="width" [style.overflow]="'hidden'">
+    <cbj-gallery-item *ngFor="let image of images" [clickE]="emitClick" [classes]="classes" [src]="image"></cbj-gallery-item>
+</div>

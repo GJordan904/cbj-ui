@@ -6,11 +6,8 @@
   "apps": [
     {
       "root": "docs",
-      "outDir": "dist/docs",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "outDir": "/var/www/html/cbjn/public/ui",
+      "assets": [],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",

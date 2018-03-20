@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CbjButtonComponent } from './cbj-button.component';
 import { RouterModule } from '@angular/router';
-import { CbjRippleModule } from '../ripple';
+import { CbjRippleModule } from '../ripple/index';
 
 @NgModule({
   imports: [

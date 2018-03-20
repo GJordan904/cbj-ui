@@ -1,6 +1,6 @@
 .cbj-site-wrapper {
   @include make-container;
-  max-height: 100vh;
+  height: 100vh;
   overflow: hidden;
   padding: 0;
 }
@@ -26,8 +26,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 56px);
-  max-width: 320px;
+  width: 320px;
   height: 100%;
   transition: all 350ms ease-in-out;
   padding: 0;
@@ -37,18 +36,6 @@
   z-index: 200;
 
   &.open {
-    transform: translateX(0);
-
-    @include media-breakpoint-up(lg) {
-      width: calc(100% - 56px);
-      max-width: 320px;
-    }
-  }
-
-  @include media-breakpoint-up(lg) {
-    @include make-col-ready;
-    width: 0;
-    padding: 0;
     transform: translateX(0);
   }
 
@@ -142,36 +129,22 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% - 56px);
-    max-width: 320px;
+    width: 320px;
     height: 100%;
     transition: all 350ms ease-in-out;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
     transform: translateX(-101%);
     z-index: 200;
 
     &.open {
       transform: translateX(0);
       @include cbj-elevation-left-sidebar;
-
-      @include media-breakpoint-up(lg) {
-        width: calc(100% - 56px);
-        max-width: 320px;
-      }
     }
 
     .cbj-sidebar {
       width: 320px;
       min-width: 100%;
-    }
-
-    @include media-breakpoint-up(lg) {
-      @include make-col-ready;
-      width: 0;
-      padding: 0;
-      transform: translateX(0);
     }
   }
 }
@@ -203,7 +176,7 @@
 .cbj-main-content {
   @include make-col-ready;
   transition: all 350ms ease-in-out;
-  max-height: calc(100vh - #{$navbar-height});
+  height: calc(100vh - #{$navbar-height});
   overflow-x: auto;
   padding: 0;
 }

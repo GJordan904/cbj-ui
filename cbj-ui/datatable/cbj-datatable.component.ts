@@ -2,8 +2,8 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {DatatableColumn, DatatableMultiData, DatatableOptions} from './cbj-datatable.models';
 import {MenuItem} from '../menu';
 import {HttpClient} from '@angular/common/http';
-import {ScrollbarService, WindowService} from '../@codebyjordan/scrollbar';
-import {collapse} from '../animations';
+import { ScrollbarService, WindowService } from '../scroll/index';
+import {collapse} from '../animations/index';
 import {Subject} from 'rxjs/Subject';
 
 const DEFAULTS: DatatableOptions = {

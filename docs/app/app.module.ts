@@ -6,20 +6,20 @@ import { AppComponent } from './app.component';
 import { CbjUiModule } from '@codebyjordan/ui';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CbjCommonModule } from './common/cbj-common.module';
+import { StatusComponent } from './status/status.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    StatusComponent,
   ],
   imports: [
-    CbjCommonModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    CbjUiModule.forRoot({}),
+    CbjUiModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

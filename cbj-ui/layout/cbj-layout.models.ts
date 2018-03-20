@@ -1,4 +1,5 @@
-import { ScrollbarOptions } from '../@codebyjordan/scrollbar';
+import { ScrollbarOptions } from '../scroll/index';
+import { RippleConfig } from '../ripple/index';
 
 /**
  * @interface LayoutOptions
@@ -20,6 +21,7 @@ export interface LayoutOptions {
   navbarClasses?: string;
   useSidebar?: boolean;
   sidebarLinks?:  SidebarLink[];
+  rippleConf?: RippleConfig;
   closeOnClick?: boolean;
   linkClasses?: SidebarLinksClasses;
   mainScrollbarOptions?: ScrollbarOptions;

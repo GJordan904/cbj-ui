@@ -1,10 +1,9 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
-import {CbjLayoutComponent} from './cbj-layout.component';
-import {CbjRippleModule} from '../ripple';
-import {CbjScrollModule} from '../scroll';
-import { ScrollbarService, WINDOW, _window, WindowService } from '../@codebyjordan/scrollbar';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CbjLayoutComponent } from './cbj-layout.component';
+import {CbjRippleModule } from '../ripple/index';
+import { CbjScrollModule } from '../scroll/index';
 
 @NgModule({
   imports: [
@@ -20,16 +19,4 @@ import { ScrollbarService, WINDOW, _window, WindowService } from '../@codebyjord
     CbjLayoutComponent,
   ]
 })
-export class CbjLayoutModule {
-
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CbjLayoutModule,
-      providers: [
-        { provide: WINDOW, useFactory: _window },
-        WindowService,
-        ScrollbarService
-      ]
-    };
-  }
-}
+export class CbjLayoutModule { }
